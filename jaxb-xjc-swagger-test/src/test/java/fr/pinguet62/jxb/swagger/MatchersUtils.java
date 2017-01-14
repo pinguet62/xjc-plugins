@@ -29,7 +29,7 @@ public final class MatchersUtils {
         };
     };
 
-    public static Matcher<Class<?>> hasDescription(String description) {
+    public static Matcher<Class<?>> hasDescription(final String description) {
         return new TypeSafeMatcherWithoutDescription<Class<?>>() {
             @Override
             protected boolean matchesSafely(Class<?> type) {
@@ -38,7 +38,7 @@ public final class MatchersUtils {
         };
     };
 
-    public static <T extends Enum<T>> Matcher<Class<T>> enumValue(String fieldName, Matcher<T> fieldMatcher) {
+    public static <T extends Enum<T>> Matcher<Class<T>> enumValue(final String fieldName, final Matcher<T> fieldMatcher) {
         return new TypeSafeMatcherWithoutDescription<Class<T>>() {
             @Override
             protected boolean matchesSafely(Class<T> type) {
@@ -51,7 +51,7 @@ public final class MatchersUtils {
         };
     };
 
-    public static Matcher<Class<?>> field(String fieldName, Matcher<Field> fieldMatcher) {
+    public static Matcher<Class<?>> field(final String fieldName, final Matcher<Field> fieldMatcher) {
         return new TypeSafeMatcherWithoutDescription<Class<?>>() {
             @Override
             protected boolean matchesSafely(Class<?> type) {
@@ -74,7 +74,7 @@ public final class MatchersUtils {
         };
     };
 
-    public static Matcher<Field> hasValue(String apiModelPropertyValue) {
+    public static Matcher<Field> hasValue(final String apiModelPropertyValue) {
         return new TypeSafeMatcherWithoutDescription<Field>() {
             @Override
             protected boolean matchesSafely(Field field) {
@@ -83,7 +83,7 @@ public final class MatchersUtils {
         };
     };
 
-    public static Matcher<Field> isRequired(boolean required) {
+    public static Matcher<Field> isRequired(final boolean required) {
         return new TypeSafeMatcherWithoutDescription<Field>() {
             @Override
             protected boolean matchesSafely(Field field) {
@@ -92,7 +92,7 @@ public final class MatchersUtils {
         };
     };
 
-    public static Matcher<Field> hasDataType(String apiModelPropertyDataType) {
+    public static Matcher<Field> hasDataType(final String apiModelPropertyDataType) {
         return new TypeSafeMatcherWithoutDescription<Field>() {
             @Override
             protected boolean matchesSafely(Field field) {
