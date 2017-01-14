@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fr/pinguet62/jaxb/javadoc/model"
+	xmlns:model="http://fr/pinguet62/jaxb/javadoc/model">
+
+	<!-- Class -->
+	<xs:complexType name="UncommentClass" />
+	<xs:complexType name="CommentClass">
+		<xs:annotation>
+			<xs:documentation>Comment of xs:element CommentType</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="uncommentedAttr" type="xs:string" />
+			<xs:element name="commentedAttr" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Comment of xs:element attr</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Enumeration -->
+	<xs:simpleType name="EnumCommentClass">
+		<xs:annotation>
+			<xs:documentation>Comment of xs:simpleType EnumCommentClass</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="COMMENTED_VALUE">
+				<xs:annotation>
+					<xs:documentation>Comment of xs:enumeration COMMENTED_VALUE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UNCOMMENTED_VALUE" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
