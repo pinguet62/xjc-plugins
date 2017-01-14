@@ -8,6 +8,10 @@
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<name>JAXB XJC plugin for Swagger</name>
+	<description>Automatically adding annotations from Swagger to generated classes from an XSD</description>
+	<url>https://github.com/pinguet62/jaxb-xjc-swagger-plugin</url>
+
 	<modules>
 		<module>jaxb-xjc-swagger</module>
 		<module>jaxb-xjc-swagger-test</module>
