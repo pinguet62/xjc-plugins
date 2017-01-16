@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.pinguet62</groupId>
-	<artifactId>jaxb-xjc-javadoc-plugin</artifactId>
+	<artifactId>jaxb-xjc-javadoc</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<name>JAXB XJC plugin for Javadoc</name>
 	<description>Automatically adding XSD javadoc to generated JAXB classes</description>
-	<url>https://github.com/pinguet62/jaxb-xjc-javadoc-plugin</url>
-
-	<modules>
-		<module>jaxb-xjc-javadoc</module>
-		<module>jaxb-xjc-javadoc-test</module>
-	</modules>
+	<url>https://github.com/pinguet62/jaxb-xjc-javadoc</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,6 +18,33 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-xjc</artifactId>
+			<version>2.2.11</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.2.11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -33,7 +55,6 @@
 				<version>2.2.1</version>
 				<executions>
 					<execution>
-						<id>attach-sources</id>
 						<goals>
 							<goal>jar-no-fork</goal>
 						</goals>
@@ -49,7 +70,6 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>attach-javadocs</id>
 						<goals>
 							<goal>jar</goal>
 						</goals>
@@ -64,7 +84,6 @@
 				<version>1.5</version>
 				<executions>
 					<execution>
-						<id>sign-artifacts</id>
 						<phase>deploy</phase>
 						<goals>
 							<goal>sign</goal>
@@ -101,7 +120,6 @@
 
 	<developers>
 		<developer>
-			<id>pinguet62</id>
 			<name>PINGUET Julien</name>
 			<email>pinguet62@gmail.com</email>
 			<url>https://github.com/pinguet62</url>
@@ -114,9 +132,10 @@
 	</developers>
 
 	<scm>
-		<url>https://github.com/pinguet62/jaxb-xjc-javadoc-plugin</url>
-		<connection>scm:git:git@github.com:pinguet62/jaxb-xjc-javadoc-plugin.git</connection>
-		<developerConnection>scm:git:git@github.com:pinguet62/jaxb-xjc-javadoc-plugin.git</developerConnection>
+		<url>https://github.com/pinguet62/jaxb-xjc-javadoc</url>
+		<connection>scm:git:git@github.com:pinguet62/jaxb-xjc-javadoc.git</connection>
+		<developerConnection>scm:git:git@github.com:pinguet62/jaxb-xjc-javadoc.git</developerConnection>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>

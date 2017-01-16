@@ -42,7 +42,7 @@ public enum JavadocRemplacementStrategy {
      * @param javadoc The {@link JDocComment} to modify.
      * @param documentation The javadoc of component (class, field, method, ...).
      */
-    public abstract void apply(JDocComment javadoc, String classDocumentation);
+    public abstract void apply(JDocComment javadoc, String documentation);
 
     public abstract String getMavenOption();
 

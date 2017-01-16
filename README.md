@@ -1,7 +1,6 @@
 # JAXB XJC Plugin for Javadoc
 
-[![Dependency Status](https://www.versioneye.com/user/projects/XXXXXXXXXX/badge.svg?style=flat)](https://www.versioneye.com/user/projects/XXXXXXXXXX)
-[![Dependency Status](https://www.versioneye.com/user/projects/YYYYYYYYYYYYYYYYY/badge.svg?style=flat)](https://www.versioneye.com/user/projects/YYYYYYYYYYYYYYYYY)
+[![Dependency Status](https://www.versioneye.com/user/projects/587ab9985450ea0042210150/badge.svg?style=flat)](https://www.versioneye.com/user/projects/587ab9985450ea0042210150)
 [![Build Status](https://travis-ci.org/pinguet62/jaxb-xjc-javadoc-plugin.svg?branch=master)](https://travis-ci.org/pinguet62/jaxb-xjc-javadoc-plugin)
 [![codecov.io](https://codecov.io/github/pinguet62/jaxb-xjc-javadoc-plugin/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/jaxb-xjc-javadoc-plugin?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/pinguet62/jaxb-xjc-javadoc-plugin/badge.svg?branch=master)](https://coveralls.io/github/pinguet62/jaxb-xjc-javadoc-plugin?branch=master)

@@ -2,6 +2,17 @@ package fr.pinguet62.jxb.javadoc;
 
 public enum DocumentationFormatterStrategy {
 
+    ALL_SPACES {
+        @Override
+        public String getMavenOption() {
+            return "allSpaces";
+        }
+
+        @Override
+        public String process(String input) {
+            return input.replaceAll("^\\s*", "").replaceAll("(\\s*\r?\n\\s*)", "\r\n").replaceAll("\\s*$", "");
+        }
+    },
     /** @see String#trim() */
     TRIM {
         @Override
@@ -13,17 +24,6 @@ public enum DocumentationFormatterStrategy {
         public String process(String input) {
             return input.trim();
         }
-    },
-    ALL_SPACES {
-        @Override
-        public String getMavenOption() {
-            return "allSpaces";
-        }
-
-        @Override
-        public String process(String input) {
-            return input.replaceAll("^\\s*", "").replaceAll("(\\s*\r?\n\\s*)", "\r\n").replaceAll("\\s*$", "");
-        }
     };
 
     public static DocumentationFormatterStrategy determineStrategy(String mavenOption) {
@@ -33,12 +33,13 @@ public enum DocumentationFormatterStrategy {
         throw new UnsupportedOperationException("Invalid strategy: " + mavenOption);
     }
 
+    public abstract String getMavenOption();
+
     /**
      * @param input The XSD message.<br>
      *        Cannot be {@code null}.
+     * @return The formatted documentation.
      */
     public abstract String process(String input);
-
-    public abstract String getMavenOption();
 
 }

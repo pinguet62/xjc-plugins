@@ -13,6 +13,7 @@ public final class Utils {
     /**
      * Extract the XSD documentation.
      *
+     * @param schemaComponent The top level tag.
      * @return The content of XSD tag.<br>
      *         {@code null} if tag is absent.
      */
