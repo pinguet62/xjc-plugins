@@ -1,4 +1,4 @@
-# https://travis-ci.org/pinguet62/jaxb-xjc-swagger-plugin
+# https://travis-ci.org/pinguet62/jaxb-xjc-swagger
 
 language: java
 jdk: oraclejdk8

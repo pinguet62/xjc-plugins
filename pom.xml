@@ -1,30 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.pinguet62</groupId>
-	<artifactId>jaxb-xjc-swagger-plugin</artifactId>
+	<artifactId>jaxb-xjc-swagger</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<name>JAXB XJC plugin for Swagger</name>
 	<description>Automatically adding annotations from Swagger to generated classes from an XSD</description>
-	<url>https://github.com/pinguet62/jaxb-xjc-swagger-plugin</url>
-
-	<modules>
-		<module>jaxb-xjc-swagger</module>
-		<module>jaxb-xjc-swagger-test</module>
-	</modules>
+	<url>https://github.com/pinguet62/jaxb-xjc-swagger</url>
 
 	<properties>
-		<swagger.version>1.5.10</swagger.version>
-
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-xjc</artifactId>
+			<version>2.2.11</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.2.11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>1.5.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -35,7 +60,6 @@
 				<version>2.2.1</version>
 				<executions>
 					<execution>
-						<id>attach-sources</id>
 						<goals>
 							<goal>jar-no-fork</goal>
 						</goals>
@@ -51,7 +75,6 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>attach-javadocs</id>
 						<goals>
 							<goal>jar</goal>
 						</goals>
@@ -66,7 +89,6 @@
 				<version>1.5</version>
 				<executions>
 					<execution>
-						<id>sign-artifacts</id>
 						<phase>deploy</phase>
 						<goals>
 							<goal>sign</goal>
@@ -103,7 +125,6 @@
 
 	<developers>
 		<developer>
-			<id>pinguet62</id>
 			<name>PINGUET Julien</name>
 			<email>pinguet62@gmail.com</email>
 			<url>https://github.com/pinguet62</url>
@@ -116,9 +137,9 @@
 	</developers>
 
 	<scm>
-		<url>https://github.com/pinguet62/jaxb-xjc-swagger-plugin</url>
-		<connection>scm:git:git@github.com:pinguet62/jaxb-xjc-swagger-plugin.git</connection>
-		<developerConnection>scm:git:git@github.com:pinguet62/jaxb-xjc-swagger-plugin.git</developerConnection>
+		<url>https://github.com/pinguet62/jaxb-xjc-swagger</url>
+		<connection>scm:git:git@github.com:pinguet62/jaxb-xjc-swagger.git</connection>
+		<developerConnection>scm:git:git@github.com:pinguet62/jaxb-xjc-swagger.git</developerConnection>
 	</scm>
 
 	<distributionManagement>

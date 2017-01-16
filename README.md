@@ -1,11 +1,10 @@
 # JAXB XJC Plugin for Swagger 2
 
-[![Dependency Status](https://www.versioneye.com/user/projects/587a72b5de66c8002e366201/badge.svg?style=flat)](https://www.versioneye.com/user/projects/587a72b5de66c8002e366201)
-[![Dependency Status](https://www.versioneye.com/user/projects/587a72b4de66c8004f8f360e/badge.svg?style=flat)](https://www.versioneye.com/user/projects/587a72b4de66c8004f8f360e)
-[![Build Status](https://travis-ci.org/pinguet62/jaxb-xjc-swagger-plugin.svg?branch=master)](https://travis-ci.org/pinguet62/jaxb-xjc-swagger-plugin)
-[![codecov.io](https://codecov.io/github/pinguet62/jaxb-xjc-swagger-plugin/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/jaxb-xjc-swagger-plugin?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/pinguet62/jaxb-xjc-swagger-plugin/badge.svg?branch=master)](https://coveralls.io/github/pinguet62/jaxb-xjc-swagger-plugin?branch=master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/jaxb-xjc-swagger-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/jaxb-xjc-swagger-plugin)
+[![Dependency Status](https://www.versioneye.com/user/projects/587d382b20bf410029a09c93/badge.svg?style=flat)](https://www.versioneye.com/user/projects/587d382b20bf410029a09c93)
+[![Build Status](https://travis-ci.org/pinguet62/jaxb-xjc-swagger.svg?branch=master)](https://travis-ci.org/pinguet62/jaxb-xjc-swagger)
+[![codecov.io](https://codecov.io/github/pinguet62/jaxb-xjc-swagger/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/jaxb-xjc-swagger?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/pinguet62/jaxb-xjc-swagger/badge.svg?branch=master)](https://coveralls.io/github/pinguet62/jaxb-xjc-swagger?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/jaxb-xjc-swagger/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/jaxb-xjc-swagger)
 
 Automatically adding annotations from Swagger to generated classes from an XSD.
 
