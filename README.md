@@ -1,6 +1,7 @@
 # JAXB XJC Plugin for Swagger 2
 
 [![Dependency Status](https://www.versioneye.com/user/projects/587d382b20bf410029a09c93/badge.svg?style=flat)](https://www.versioneye.com/user/projects/587d382b20bf410029a09c93)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/51fe4a0f7a424ff889021a18d804fd63)](https://www.codacy.com/app/pinguet62/jaxb-xjc-swagger?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pinguet62/jaxb-xjc-swagger&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/pinguet62/jaxb-xjc-swagger.svg?branch=master)](https://travis-ci.org/pinguet62/jaxb-xjc-swagger)
 [![codecov.io](https://codecov.io/github/pinguet62/jaxb-xjc-swagger/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/jaxb-xjc-swagger?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/pinguet62/jaxb-xjc-swagger/badge.svg?branch=master)](https://coveralls.io/github/pinguet62/jaxb-xjc-swagger?branch=master)
