@@ -1,10 +1,11 @@
 # JAXB XJC Plugin for Javadoc
 
 [![Dependency Status](https://www.versioneye.com/user/projects/587ab9985450ea0042210150/badge.svg?style=flat)](https://www.versioneye.com/user/projects/587ab9985450ea0042210150)
-[![Build Status](https://travis-ci.org/pinguet62/jaxb-xjc-javadoc-plugin.svg?branch=master)](https://travis-ci.org/pinguet62/jaxb-xjc-javadoc-plugin)
-[![codecov.io](https://codecov.io/github/pinguet62/jaxb-xjc-javadoc-plugin/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/jaxb-xjc-javadoc-plugin?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/pinguet62/jaxb-xjc-javadoc-plugin/badge.svg?branch=master)](https://coveralls.io/github/pinguet62/jaxb-xjc-javadoc-plugin?branch=master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/jaxb-xjc-javadoc-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/jaxb-xjc-javadoc-plugin)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/711cd823176249e7acd92e0ce710fe9f)](https://www.codacy.com/app/pinguet62/jaxb-xjc-javadoc?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pinguet62/jaxb-xjc-javadoc&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/pinguet62/jaxb-xjc-javadoc.svg?branch=master)](https://travis-ci.org/pinguet62/jaxb-xjc-javadoc)
+[![codecov.io](https://codecov.io/github/pinguet62/jaxb-xjc-javadoc/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/jaxb-xjc-javadoc?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/pinguet62/jaxb-xjc-javadoc/badge.svg?branch=master)](https://coveralls.io/github/pinguet62/jaxb-xjc-javadoc?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/jaxb-xjc-javadoc/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/jaxb-xjc-javadoc)
 
 Automatically adding javadoc to generated classes from an XSD.
 
