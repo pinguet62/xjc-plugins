@@ -7,6 +7,7 @@ import com.sun.xml.xsom.XSAnnotation;
 import com.sun.xml.xsom.XSAttributeUse;
 import com.sun.xml.xsom.XSComponent;
 import com.sun.xml.xsom.XSParticle;
+import com.sun.xml.xsom.impl.RestrictionSimpleTypeImpl;
 
 public final class Utils {
 
@@ -40,6 +41,8 @@ public final class Utils {
             return ((XSParticle) component).getTerm();
         else if (component instanceof XSAttributeUse)
             return ((XSAttributeUse) component).getDecl();
+        else if (component instanceof RestrictionSimpleTypeImpl)
+            return component;
         else
             throw new UnsupportedOperationException(
                     "Unknown " + XSComponent.class.getSimpleName() + " type: " + component.getClass());
