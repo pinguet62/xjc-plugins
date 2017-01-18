@@ -59,6 +59,8 @@ public class Application extends Plugin {
 
                 // Setter
                 JMethod setter = Utils.getMethod(classOutline, "set" + fieldOutline.getPropertyInfo().getName(true));
+                if (setter == null) // one-to-many has only getter
+                    continue;
                 javadocApplier.apply(setter.javadoc(), propertyDocumentation);
             }
         }
