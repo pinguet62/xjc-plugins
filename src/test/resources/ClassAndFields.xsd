@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fr/pinguet62/jaxb/javadoc/model">
+
+	<xs:complexType name="UncommentedClass" />
+
+	<xs:complexType name="CommentedClass">
+		<xs:annotation>
+			<xs:documentation>Comment of xs:element CommentedType</xs:documentation>
+		</xs:annotation>
+
+		<xs:sequence>
+			<xs:element name="uncommentedAttr" type="xs:string" />
+
+			<xs:element name="commentedAttr" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Comment of xs:element attr</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
