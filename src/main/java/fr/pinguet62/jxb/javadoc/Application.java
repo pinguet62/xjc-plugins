@@ -1,5 +1,9 @@
 package fr.pinguet62.jxb.javadoc;
 
+import static fr.pinguet62.jxb.javadoc.Utils.getDocumentation;
+import static fr.pinguet62.jxb.javadoc.Utils.getMethod;
+import static fr.pinguet62.jxb.javadoc.Utils.resolveIndirectAccessToField;
+
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
@@ -12,6 +16,7 @@ import com.sun.tools.xjc.outline.EnumConstantOutline;
 import com.sun.tools.xjc.outline.EnumOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
+import com.sun.xml.xsom.XSComponent;
 
 public class Application extends Plugin {
 
@@ -34,15 +39,16 @@ public class Application extends Plugin {
         // Classes
         for (ClassOutline classOutline : outline.getClasses()) {
             // Class
-            String classDocumentation = Utils.getDocumentation(classOutline.target.getSchemaComponent());
+            String classDocumentation = getDocumentation(classOutline.target.getSchemaComponent());
             if (classDocumentation != null)
                 classDocumentation = formatter.process(classDocumentation);
             javadocApplier.apply(classOutline.ref.javadoc(), classDocumentation);
 
             // Fields
             for (FieldOutline fieldOutline : classOutline.getDeclaredFields()) {
-                String propertyDocumentation = Utils.getDocumentation(
-                        Utils.resolveIndirectAccessToField(fieldOutline.getPropertyInfo().getSchemaComponent()));
+                XSComponent schemaComponent = resolveIndirectAccessToField(fieldOutline.getPropertyInfo().getSchemaComponent());
+
+                String propertyDocumentation = getDocumentation(schemaComponent);
                 if (propertyDocumentation != null)
                     propertyDocumentation = formatter.process(propertyDocumentation);
 
@@ -54,11 +60,11 @@ public class Application extends Plugin {
                 boolean primitiveBoolean = (fieldOutline.getRawType().isPrimitive()
                         && fieldOutline.getRawType().boxify().getPrimitiveType() == outline.getCodeModel().BOOLEAN);
                 String getterName = (primitiveBoolean ? "is" : "get") + fieldOutline.getPropertyInfo().getName(true);
-                JMethod getter = Utils.getMethod(classOutline, getterName);
+                JMethod getter = getMethod(classOutline, getterName);
                 javadocApplier.apply(getter.javadoc(), propertyDocumentation);
 
                 // Setter
-                JMethod setter = Utils.getMethod(classOutline, "set" + fieldOutline.getPropertyInfo().getName(true));
+                JMethod setter = getMethod(classOutline, "set" + fieldOutline.getPropertyInfo().getName(true));
                 if (setter == null) // one-to-many has only getter
                     continue;
                 javadocApplier.apply(setter.javadoc(), propertyDocumentation);
@@ -68,14 +74,14 @@ public class Application extends Plugin {
         // Enumerations
         for (EnumOutline enumOutline : outline.getEnums()) {
             // Class
-            String classDocumentation = Utils.getDocumentation(enumOutline.target.getSchemaComponent());
+            String classDocumentation = getDocumentation(enumOutline.target.getSchemaComponent());
             if (classDocumentation != null)
                 classDocumentation = formatter.process(classDocumentation);
             javadocApplier.apply(enumOutline.clazz.javadoc(), classDocumentation);
 
             // Values
             for (EnumConstantOutline enumConstantOutline : enumOutline.constants) {
-                String fieldDocumentation = Utils.getDocumentation(enumConstantOutline.target.getSchemaComponent());
+                String fieldDocumentation = getDocumentation(enumConstantOutline.target.getSchemaComponent());
                 if (fieldDocumentation != null)
                     fieldDocumentation = formatter.process(fieldDocumentation);
                 javadocApplier.apply(enumConstantOutline.constRef.javadoc(), fieldDocumentation);
