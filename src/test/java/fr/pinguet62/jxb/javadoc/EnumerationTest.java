@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+/** {@code <xs:restriction>} & {@link Enum} */
 public class EnumerationTest extends AbstractXjcTest {
 
     @Override

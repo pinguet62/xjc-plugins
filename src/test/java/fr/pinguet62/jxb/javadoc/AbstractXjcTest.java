@@ -21,6 +21,10 @@ import com.sun.tools.xjc.Driver;
  */
 public abstract class AbstractXjcTest {
 
+    public static class NotFoundException extends RuntimeException {
+        private static final long serialVersionUID = 1;
+    }
+
     public static final String OUTPUT_FOLDER = "target";
 
     public static final String TARGET_NAMESPACE = "/fr/pinguet62/jaxb/javadoc/model";
@@ -46,13 +50,18 @@ public abstract class AbstractXjcTest {
 
         // Find bloc
         List<String> bloc = new ArrayList<>();
+        boolean found = false;
         for (String line : file) {
-            if (line.matches(regexEnd))
+            if (line.matches(regexEnd)) {
+                found = true;
                 break; // end of bloc
+            }
             if (line.matches(regexBegin))
                 bloc.clear(); // start of bloc
             bloc.add(line);
         }
+        if (!found)
+            throw new NotFoundException();
 
         String outputDoc = bloc.get(1).replaceFirst("^ *\\* ", "");
         if (expectedDoc == null)
@@ -66,6 +75,18 @@ public abstract class AbstractXjcTest {
 
     public static boolean classFieldCommentedWith(String type, String field, String expectedDoc) {
         return checkDocumentation(type, "    /\\*\\*", "    protected [^ ]+ " + field + ";", expectedDoc);
+    }
+
+    /** @param field The field name (without {@code "get"} prefix). */
+    public static boolean classGetterCommentedWith(String type, String field, String expectedDoc) {
+        field = String.valueOf(field.charAt(0)).toUpperCase() + field.substring(1);
+        return checkDocumentation(type, "    /\\*\\*", "    public [^ ]+ (get|is)" + field + "\\(\\) \\{", expectedDoc);
+    }
+
+    /** @param field The field name (without {@code "set"} prefix). */
+    public static boolean classSetterCommentedWith(String type, String field, String expectedDoc) {
+        field = String.valueOf(field.charAt(0)).toUpperCase() + field.substring(1);
+        return checkDocumentation(type, "    /\\*\\*", "    public void set" + field + "\\([^\\)]+\\) \\{", expectedDoc);
     }
 
     public static boolean enumFieldCommentedWith(String type, String field, String expectedDoc) {

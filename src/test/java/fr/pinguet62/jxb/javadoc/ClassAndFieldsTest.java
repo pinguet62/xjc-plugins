@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+/** {@code <xs:complexType} & {@code <xs:element>} */
 public class ClassAndFieldsTest extends AbstractXjcTest {
 
     @Override
