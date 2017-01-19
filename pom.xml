@@ -4,7 +4,7 @@
 
 	<groupId>fr.pinguet62</groupId>
 	<artifactId>jaxb-xjc-javadoc</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>JAXB XJC plugin for Javadoc</name>
@@ -155,7 +155,7 @@
 		<url>https://github.com/pinguet62/jaxb-xjc-javadoc</url>
 		<connection>scm:git:git@github.com:pinguet62/jaxb-xjc-javadoc.git</connection>
 		<developerConnection>scm:git:git@github.com:pinguet62/jaxb-xjc-javadoc.git</developerConnection>
-		<tag>1.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
