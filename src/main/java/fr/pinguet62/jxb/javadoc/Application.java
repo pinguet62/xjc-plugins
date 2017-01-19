@@ -57,10 +57,13 @@ public class Application extends Plugin {
                 javadocApplier.apply(fieldVar.javadoc(), propertyDocumentation);
 
                 // Getter
-                boolean primitiveBoolean = (fieldOutline.getRawType().isPrimitive()
-                        && fieldOutline.getRawType().boxify().getPrimitiveType() == outline.getCodeModel().BOOLEAN);
-                String getterName = (primitiveBoolean ? "is" : "get") + fieldOutline.getPropertyInfo().getName(true);
+                String getterName = "get" + fieldOutline.getPropertyInfo().getName(true);
                 JMethod getter = getMethod(classOutline, getterName);
+                // boolean & "is" getter prefix name
+                if (getter == null && fieldOutline.getRawType().boxify().getPrimitiveType() == outline.getCodeModel().BOOLEAN) {
+                    getterName = getterName.replaceFirst("^get", "is");
+                    getter = getMethod(classOutline, getterName);
+                }
                 javadocApplier.apply(getter.javadoc(), propertyDocumentation);
 
                 // Setter
