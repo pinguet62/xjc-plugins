@@ -64,7 +64,9 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.9</version>
 				<configuration>
-					<excludes>fr/pinguet62/xjc/common/test/**.*</excludes>
+					<excludes>
+						<exclude>fr/pinguet62/xjc/common/test/**.*</exclude>
+					</excludes>
 				</configuration>
 				<executions>
 					<execution>
