@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fr/pinguet62" xmlns:model="http://fr/pinguet62">
+
+	<!-- Class -->
+	<xs:complexType name="UncommentedClass" />
+	<xs:complexType name="CommentedClass">
+		<xs:annotation>
+			<xs:documentation>Comment of xs:element CommentedClass</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+
+	<!-- Class field -->
+	<xs:complexType name="FieldClass">
+		<xs:sequence>
+			<xs:element name="uncommentedAttr" type="xs:string" />
+			<xs:element name="commentedAttr" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Comment of xs:element commentedAttr</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Enum class -->
+	<xs:simpleType name="UncommentedEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ANY" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CommentedEnum">
+		<xs:annotation>
+			<xs:documentation>Comment of xs:simpleType CommentedEnum</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ANY" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Enum entry -->
+	<xs:simpleType name="EntryEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNCOMMENTED_VALUE" />
+			<xs:enumeration value="COMMENTED_VALUE">
+				<xs:annotation>
+					<xs:documentation>Comment of xs:enumeration</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Group -->
+	<xs:group name="GroupClass">
+		<xs:sequence>
+			<xs:element name="attr" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Comment of xs:group GroupClass.attr</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="SampleGroupClass">
+		<xs:group ref="model:GroupClass"></xs:group>
+	</xs:complexType>
+</xs:schema>

@@ -19,37 +19,12 @@
 	</properties>
 
 	<modules>
-		<module>xjc-javadoc-plugin</module>
-		<module>xjc-listtoset-plugin</module>
-		<module>xjc-swagger-plugin</module>
+		<module>common</module>
+		<module>common-test</module>
+		<module>javadoc</module>
+		<module>listtoset</module>
+		<module>swagger</module>
 	</modules>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-xjc</artifactId>
-			<version>2.2.11</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-core</artifactId>
-			<version>2.2.11</version>
-		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.5</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<plugins>
@@ -88,6 +63,9 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.9</version>
+				<configuration>
+					<excludes>fr/pinguet62/xjc/common/test/**.*</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
