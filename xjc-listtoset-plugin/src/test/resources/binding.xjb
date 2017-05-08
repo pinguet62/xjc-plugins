@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jxb:bindings version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:p62="http://pinguet62.fr" jxb:extensionBindingPrefixes="p62">
+
+	<jxb:bindings schemaLocation="./test.xsd">
+		<jxb:bindings node="/xs:schema/xs:complexType[@name='TestClass']//xs:element[@name='multiple']">
+			<p62:typeToSet />
+		</jxb:bindings>
+	</jxb:bindings>
+
+</jxb:bindings>

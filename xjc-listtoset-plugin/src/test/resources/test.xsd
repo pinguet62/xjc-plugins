@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fr/pinguet62/jaxb/javadoc/model">
+
+	<xs:complexType name="TestClass">
+		<xs:sequence>
+			<xs:element name="single" type="xs:string" maxOccurs="unbounded" />
+			<xs:element name="multiple" type="xs:string" maxOccurs="unbounded" />
+			<xs:element name="noInBinding" type="xs:string" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
