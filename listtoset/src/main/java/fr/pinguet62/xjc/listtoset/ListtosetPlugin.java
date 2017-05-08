@@ -14,6 +14,7 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
 import com.sun.codemodel.JClass;
+import com.sun.codemodel.JDocComment;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
@@ -27,7 +28,6 @@ import com.sun.tools.xjc.outline.Outline;
 
 import fr.pinguet62.xjc.common.Utils;
 
-// TODO Javadoc
 public class ListtosetPlugin extends Plugin {
 
     public static final String _NAMESPACE_URI = "http://pinguet62.fr";
@@ -102,10 +102,12 @@ public class ListtosetPlugin extends Plugin {
         // Original getter
         String methodName = "get" + fieldOutline.getPropertyInfo().getName(true);
         JMethod originalGetter = Utils.getMethod(classOutline, methodName);
+        JDocComment javadoc = originalGetter.javadoc();
         classOutline.implClass.methods().remove(originalGetter);
 
         // New getter
         JMethod newMethod = classOutline.implClass.method(PUBLIC, fieldVar.type(), methodName);
+        newMethod.javadoc().add(javadoc);
         newMethod.body()._if(fieldVar.eq(JExpr._null()))._then().assign(fieldVar, JExpr._new(hashsetType));
     }
 
