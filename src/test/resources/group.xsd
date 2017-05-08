@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fr/pinguet62/jaxb/javadoc/model"
+	xmlns:model="http://fr/pinguet62/jaxb/javadoc/model">
+
+	<xs:group name="MyGroup">
+		<xs:annotation>
+			<xs:documentation>MyGroup documentation...</xs:documentation>
+		</xs:annotation>
+
+		<xs:sequence>
+			<xs:element name="attr" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Group.attr documentation...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="GroupUserClass">
+		<xs:group ref="model:MyGroup"></xs:group>
+	</xs:complexType>
+
+</xs:schema>
