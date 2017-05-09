@@ -15,7 +15,10 @@ Input XSD:
 		<xs:sequence>
 			<xs:element name="attr" type="xs:string">
 				<xs:annotation>
-					<xs:documentation>Comment of property...</xs:documentation>
+					<xs:documentation>
+						This is the best
+						comment of the world!
+					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -38,14 +41,16 @@ Generated JAXB classes:
 public class SampleModel {
 
     /**
-     * Comment of property...
+     * This is the best<br>
+     * comment of the world!
      * 
      */
     @XmlElement(required = true)
     protected String attr;
 
     /**
-     * Comment of property...
+     * This is the best<br>
+     * comment of the world!
      * 
      * @return
      *     possible object is
@@ -57,7 +62,8 @@ public class SampleModel {
     }
 
     /**
-     * Comment of property...
+     * This is the best<br>
+     * comment of the world!
      * 
      * @param value
      *     allowed object is

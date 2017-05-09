@@ -2,6 +2,7 @@ package fr.pinguet62.xjc.javadoc;
 
 import com.sun.codemodel.JDocComment;
 
+// TODO APPEND_END
 public enum JavadocRemplacementStrategy {
 
     /** @see String#trim() */

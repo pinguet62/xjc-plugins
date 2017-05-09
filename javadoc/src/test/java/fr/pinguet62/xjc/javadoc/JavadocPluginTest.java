@@ -2,6 +2,7 @@ package fr.pinguet62.xjc.javadoc;
 
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findEntry;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findField;
+import static java.util.Arrays.asList;
 import static org.apache.commons.io.FileUtils.deleteDirectory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -74,6 +75,19 @@ public class JavadocPluginTest {
         EnumDeclaration type = (EnumDeclaration) parseClass("EntryEnum");
         assertTrue(formatComments(findEntry(type, "UNCOMMENTED_VALUE").getComment()).isEmpty());
         assertEquals("Comment of xs:enumeration", formatComments(findEntry(type, "COMMENTED_VALUE").getComment()).get(0));
+    }
+
+    @Test
+    public void test_formatting() {
+        TypeDeclaration type = parseClass("FormattingClass");
+        List<String> lines = asList(type.getComment().getContent().split("\r?\n"));
+        assertEquals(" *  3: a b c d e f g h i j k l m n o p q r s t u v w x y z<br>", lines.get(1));
+        assertEquals(" *  4: a b c d e f g h i j k l m n o p q r s t u v w x y z<br>", lines.get(2));
+        assertEquals(" * <br>", lines.get(3));
+        assertEquals(" *  6: a b c d e f g h i j k l m n o p q r s t u v w x y z<br>", lines.get(4));
+        assertEquals(" * <br>", lines.get(5));
+        assertEquals(" * <br>", lines.get(6));
+        assertEquals(" *  9: a b c d e f g h i j k l m n o p q r s t u v w x y z", lines.get(7));
     }
 
     @Test

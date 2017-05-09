@@ -43,7 +43,7 @@ public class SwaggerPlugin extends Plugin {
     public boolean run(Outline outline, Options options, ErrorHandler errorHandler) throws SAXException {
         // TODO Maven configuration
         ApiModelValueStrategy nameStrategy = ApiModelValueStrategy.determineStrategy("fullName");
-        DocumentationFormatterStrategy formatter = DocumentationFormatterStrategy.determineStrategy("allSpaces");
+        DocumentationFormatterStrategy formatter = DocumentationFormatterStrategy.getDefault();
 
         for (ClassOutline classOutline : outline.getClasses()) {
             // Swagger

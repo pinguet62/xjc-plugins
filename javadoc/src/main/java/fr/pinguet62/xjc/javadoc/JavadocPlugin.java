@@ -35,7 +35,7 @@ public class JavadocPlugin extends Plugin {
     @Override
     public boolean run(Outline outline, Options options, ErrorHandler errorHandler) throws SAXException {
         // TODO Maven configuration
-        DocumentationFormatterStrategy formatter = DocumentationFormatterStrategy.determineStrategy("allSpaces");
+        DocumentationFormatterStrategy formatter = DocumentationFormatterStrategy.getDefault();
         JavadocRemplacementStrategy javadocApplier = JavadocRemplacementStrategy.determineStrategy("replace");
 
         // Classes

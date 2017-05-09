@@ -2,27 +2,28 @@ package fr.pinguet62.xjc.common;
 
 public enum DocumentationFormatterStrategy {
 
-    ALL_SPACES {
+    /**
+     * Remove white space <i>indentation</i>.<br>
+     * Add <code>&lt;br&gt;</code> at end of each line for <i>line breaking</i>.
+     */
+    HTML {
         @Override
         public String getMavenOption() {
-            return "allSpaces";
+            return "html";
         }
 
         @Override
-        public String process(String input) {
-            return input.replaceAll("^\\s*", "").replaceAll("(\\s*\r?\n\\s*)", "\r\n").replaceAll("\\s*$", "");
-        }
-    },
-    /** @see String#trim() */
-    TRIM {
-        @Override
-        public String getMavenOption() {
-            return "trim";
-        }
+        public String process(String documentation) {
+            // indentation
+            documentation = documentation.replaceFirst("^( |\t)+", "").replaceAll("\n( |\t)+", "\n");
 
-        @Override
-        public String process(String input) {
-            return input.trim();
+            // first & last empty lines
+            documentation = documentation.replaceFirst("^\n+", "").replaceFirst("\n+$", "");
+
+            // HTML
+            documentation = documentation.replaceAll("\n", "<br>\n");
+
+            return documentation;
         }
     };
 
@@ -33,13 +34,18 @@ public enum DocumentationFormatterStrategy {
         throw new UnsupportedOperationException("Invalid strategy: " + mavenOption);
     }
 
+    public static DocumentationFormatterStrategy getDefault() {
+        return HTML;
+    }
+
     public abstract String getMavenOption();
 
     /**
-     * @param input The XSD message.<br>
-     *        Cannot be {@code null}.
+     * @param documentation
+     *            The XSD documentation.<br>
+     *            Cannot be {@code null}.
      * @return The formatted documentation.
      */
-    public abstract String process(String input);
+    public abstract String process(String documentation);
 
 }
