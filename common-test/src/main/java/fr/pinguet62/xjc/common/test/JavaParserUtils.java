@@ -21,6 +21,10 @@ import com.github.javaparser.ast.expr.SingleMemberAnnotationExpr;
 public class JavaParserUtils {
 
     /**
+     * @param enumConstant
+     *            The {@link BodyDeclaration} on which search.
+     * @param annotation
+     *            The {@link AnnotationExpr#getName() annotation name} type to search.
      * @return The first found (doesn't support {@link Repeatable}).<br>
      *         {@code null} if not found.
      */
@@ -31,8 +35,11 @@ public class JavaParserUtils {
         return null;
     }
 
-
     /**
+     * @param annotation
+     *            The {@link AnnotationExpr} on which search.
+     * @param key
+     *            The {@link MemberValuePair#getName() annotation parameter name} to search.
      * @return {@code null} if not found.<br>
      *         {@code null} if invalid parameter name.
      */
@@ -54,7 +61,13 @@ public class JavaParserUtils {
             throw new UnsupportedOperationException("Unknown annotation type: " + annotation.getClass());
     }
 
-    /** @return {@code null} if not found. */
+    /**
+     * @param type
+     *            The {@link EnumDeclaration} on which search.
+     * @param entry
+     *            The {@link EnumConstantDeclaration#getName() constant name} to search.
+     * @return {@code null} if not found.
+     */
     public static EnumConstantDeclaration findEntry(EnumDeclaration type, String entry) {
         for (EnumConstantDeclaration enumConstant : type.getEntries())
             if (enumConstant.getName().equals(entry))
@@ -63,8 +76,10 @@ public class JavaParserUtils {
     }
 
     /**
+     * @param type
+     *            The {@link TypeDeclaration} on which search.
      * @param name
-     *            The {@link Field#getName()}.
+     *            The {@link Field#getName() field name} to search.
      * @return {@code null} if not found.
      */
     public static FieldDeclaration findField(TypeDeclaration type, String name) {
@@ -79,6 +94,10 @@ public class JavaParserUtils {
     }
 
     /**
+     * @param type
+     *            The {@link TypeDeclaration} on which search.
+     * @param name
+     *            The {@link MethodDeclaration#getName() method name} to search.
      * @return The first found (naming collision).<br>
      *         {@code null} if not found.
      */
