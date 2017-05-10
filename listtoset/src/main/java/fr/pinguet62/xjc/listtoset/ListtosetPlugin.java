@@ -13,6 +13,7 @@ import javax.xml.namespace.QName;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
+import com.sun.codemodel.JBlock;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JDocComment;
 import com.sun.codemodel.JExpr;
@@ -32,7 +33,7 @@ public class ListtosetPlugin extends Plugin {
 
     public static final String _NAMESPACE_URI = "http://pinguet62.fr";
 
-    public static final QName CHANGE_PROPERTY_TYPE_TO_SET = new QName(_NAMESPACE_URI, "typeToSet");
+    public static final QName CHANGE_PROPERTY_TYPE_TO_SET = new QName(_NAMESPACE_URI, "typeSet");
 
     private static boolean processAll = false;
 
@@ -43,7 +44,7 @@ public class ListtosetPlugin extends Plugin {
 
     @Override
     public String getOptionName() {
-        return "XlistToSet";
+        return "Xlisttoset";
     }
 
     @Override
@@ -59,27 +60,22 @@ public class ListtosetPlugin extends Plugin {
     /** Additional arguments must start with {@link #getOptionName()}, and key separated with {@code "-"} character. */
     @Override
     public int parseArgument(Options opt, String[] args, int start) throws BadCommandLineException, IOException {
-        int consumed = 1;
-        while (start < args.length) {
-            start++;
-            String nextArg = args[start];
+        String nextArg = args[start];
 
-            // No other args
-            String prefix = "-" + getOptionName() + "-";
-            if (!nextArg.startsWith(prefix))
-                return consumed;
+        // No other args
+        String prefix = "-" + getOptionName() + "-";
+        if (!nextArg.startsWith(prefix))
+            return 0;
 
-            consumed++;
-            String arg = nextArg.substring(prefix.length());
-            switch (arg) {
-                case "processAll":
-                    processAll = true;
-                    break;
-                default:
-                    throw new UnsupportedOperationException("Unknown argument: " + arg);
-            }
+        String arg = nextArg.substring(prefix.length());
+        switch (arg) {
+            case "processAll":
+                processAll = true;
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown argument: " + arg);
         }
-        return consumed;
+        return 1;
     }
 
     private void processField(Outline outline, ClassOutline classOutline, FieldOutline fieldOutline) {
@@ -88,7 +84,8 @@ public class ListtosetPlugin extends Plugin {
 
         if (!fieldVar.type().toString().contains("List<"))
             if (!processAll)
-                throw new RuntimeException("Can only applied on maxOccurs=\"unbounded\" prpperties");
+                throw new RuntimeException("Can only applied on maxOccurs=\"unbounded\" properties: "
+                        + classOutline.implClass.name() + "#" + fieldVar.name());
             else
                 return; // skip property
 
@@ -108,7 +105,10 @@ public class ListtosetPlugin extends Plugin {
         // New getter
         JMethod newMethod = classOutline.implClass.method(PUBLIC, fieldVar.type(), methodName);
         newMethod.javadoc().add(javadoc);
-        newMethod.body()._if(fieldVar.eq(JExpr._null()))._then().assign(fieldVar, JExpr._new(hashsetType));
+        // impl
+        JBlock body = newMethod.body();
+        body._if(fieldVar.eq(JExpr._null()))._then().assign(fieldVar, JExpr._new(hashsetType));
+        body._return(fieldVar);
     }
 
     @Override
@@ -122,14 +122,6 @@ public class ListtosetPlugin extends Plugin {
                         processField(outline, classOutline, fieldOutline);
                         customization.markAsAcknowledged();
                     }
-        return true;
-    }
-
-    public boolean runAll(Outline outline, Options options, ErrorHandler errorHandler) throws SAXException {
-        for (ClassOutline classOutline : outline.getClasses())
-            for (FieldOutline fieldOutline : classOutline.getDeclaredFields()) {
-            }
-
         return true;
     }
 

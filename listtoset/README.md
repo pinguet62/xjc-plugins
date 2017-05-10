@@ -39,6 +39,17 @@ public class SampleModel {
 
 ## Usage
 
+Optional `binding.xjb`:
+```xml
+<jxb:bindings ... xmlns:p62="http://pinguet62.fr" jxb:extensionBindingPrefixes="p62">
+	<jxb:bindings schemaLocation="./test.xsd">
+		<jxb:bindings node="/xs:schema/xs:complexType[@name='SampleModel']//xs:element[@name='attr']">
+			<p62:typeSet />
+		</jxb:bindings>
+	</jxb:bindings>
+</jxb:bindings>
+```
+
 ```xml
 <project>
     <!-- ... -->

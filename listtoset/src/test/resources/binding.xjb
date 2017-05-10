@@ -4,7 +4,7 @@
 
 	<jxb:bindings schemaLocation="./test.xsd">
 		<jxb:bindings node="/xs:schema/xs:complexType[@name='Model']//xs:element[@name='multiple']">
-			<p62:typeToSet />
+			<p62:typeSet />
 		</jxb:bindings>
 	</jxb:bindings>
 

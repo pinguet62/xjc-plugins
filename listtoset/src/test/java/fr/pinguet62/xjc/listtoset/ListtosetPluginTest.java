@@ -35,7 +35,7 @@ public class ListtosetPluginTest {
     @Test
     public void test_binding() throws Exception {
         TypeDeclaration modelType = generateAndParse(new String[] { "src/test/resources/test.xsd", "-b",
-                "src/test/resources/binding.xjb", "-extension", "-XlistToSet", "-d", "target" });
+                "src/test/resources/binding.xjb", "-extension", "-Xlisttoset", "-d", "target" });
 
         // Field
         assertEquals("String", findField(modelType, "single").getType().toString());
@@ -51,8 +51,8 @@ public class ListtosetPluginTest {
     /** Process all properties. */
     @Test
     public void test_processAll() throws Exception {
-        TypeDeclaration modelType = generateAndParse(new String[] { "src/test/resources/test.xsd", "-extension", "-XlistToSet",
-                "-XlistToSet-processAll", "-d", "target" });
+        TypeDeclaration modelType = generateAndParse(new String[] { "src/test/resources/test.xsd", "-extension", "-Xlisttoset",
+                "-Xlisttoset-processAll", "-d", "target" });
 
         // Field
         assertEquals("String", findField(modelType, "single").getType().toString());
