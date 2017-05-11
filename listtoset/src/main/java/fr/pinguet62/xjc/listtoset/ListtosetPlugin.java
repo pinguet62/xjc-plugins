@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.xml.namespace.QName;
 
+import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
@@ -119,6 +120,11 @@ public class ListtosetPlugin extends Plugin {
                     processField(outline, classOutline, fieldOutline);
                 else
                     for (CPluginCustomization customization : fieldOutline.getPropertyInfo().getCustomizations()) {
+                        Element customizationElement = customization.element;
+                        if (!new QName(customizationElement.getNamespaceURI(), customizationElement.getLocalName())
+                                .equals(CHANGE_PROPERTY_TYPE_TO_SET))
+                            continue;
+
                         processField(outline, classOutline, fieldOutline);
                         customization.markAsAcknowledged();
                     }
