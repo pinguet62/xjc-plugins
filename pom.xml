@@ -24,6 +24,7 @@
 		<module>javadoc</module>
 		<module>listtoset</module>
 		<module>swagger</module>
+		<module>test</module>
 	</modules>
 
 	<build>
