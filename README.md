@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/pinguet62/xjc-plugins.svg?branch=master)](https://travis-ci.org/pinguet62/xjc-plugins)
 [![codecov.io](https://codecov.io/github/pinguet62/xjc-plugins/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/xjc-plugins?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/pinguet62/xjc-plugins/badge.svg?branch=master)](https://coveralls.io/github/pinguet62/xjc-plugins?branch=master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/xjc-plugins/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62.xjc/xjc-plugins)
+[![Maven Central](https://img.shields.io/maven-central/v/fr.pinguet62.xjc/xjc-plugins.svg)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62.xjc/xjc-plugins)
 
 ## Plugins
 
