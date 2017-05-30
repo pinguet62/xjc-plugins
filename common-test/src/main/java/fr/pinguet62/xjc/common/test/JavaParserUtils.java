@@ -3,6 +3,8 @@ package fr.pinguet62.xjc.common.test;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Repeatable;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.EnumConstantDeclaration;
@@ -11,6 +13,7 @@ import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.MarkerAnnotationExpr;
@@ -109,6 +112,15 @@ public class JavaParserUtils {
                     return method;
             }
         return null;
+    }
+
+    /** Remove all {@code "*"} and empty first & last lines. */
+    public static final List<String> formatComments(Comment comment) {
+        String[] lines = comment.getContent().split("\r?\n");
+        List<String> comments = new ArrayList<>();
+        for (int i = 1; i < lines.length - 2; i++)
+            comments.add(lines[i].replaceFirst("^(    )? \\* ", ""));
+        return comments;
     }
 
 }

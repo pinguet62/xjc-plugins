@@ -2,40 +2,21 @@ package fr.pinguet62.xjc.listtoset;
 
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findField;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findMethod;
-import static org.apache.commons.io.FileUtils.deleteDirectory;
+import static fr.pinguet62.xjc.listtoset.ListtosetPluginTestRunner.generateAndParse;
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
-
-import org.junit.Before;
 import org.junit.Test;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.TypeDeclaration;
-import com.sun.tools.xjc.Driver;
 
 public class ListtosetPluginTest {
 
-    private static TypeDeclaration generateAndParse(String[] args) throws Exception {
-        Driver.run(args, System.out, System.out);
-
-        CompilationUnit compilationUnit = JavaParser.parse(Paths.get("target/fr/pinguet62/Model.java").toFile());
-        return compilationUnit.getTypes().get(0);
-    }
-
-    @Before
-    public void clear() throws IOException {
-        deleteDirectory(new File("target/fr/pinguet62"));
-    }
-
     /** Properties declared into {@code binding.jxb} file. */
     @Test
-    public void test_binding() throws Exception {
-        TypeDeclaration modelType = generateAndParse(new String[] { "src/test/resources/test.xsd", "-b",
-                "src/test/resources/binding.xjb", "-extension", "-Xlisttoset", "-d", "target" });
+    public void test_default() throws Exception {
+        String[] args = new String[] { "-extension", "-b", "src/test/resources/binding.xjb" };
+
+        TypeDeclaration modelType = generateAndParse("Model", args);
 
         // Field
         assertEquals("String", findField(modelType, "single").getType().toString());
@@ -51,8 +32,9 @@ public class ListtosetPluginTest {
     /** Process all properties. */
     @Test
     public void test_processAll() throws Exception {
-        TypeDeclaration modelType = generateAndParse(new String[] { "src/test/resources/test.xsd", "-extension", "-Xlisttoset",
-                "-Xlisttoset-processAll", "-d", "target" });
+        String[] args = new String[] { "-Xlisttoset-processAll" };
+
+        TypeDeclaration modelType = generateAndParse("Model", args);
 
         // Field
         assertEquals("String", findField(modelType, "single").getType().toString());

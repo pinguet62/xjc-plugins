@@ -78,6 +78,8 @@ public class SampleModel {
 
 ## Usage
 
+### Plugin
+
 ```xml
 <project>
     <!-- ... -->
@@ -91,6 +93,7 @@ public class SampleModel {
                     <!-- ... -->
                     <args>
                         <arg>-Xjavadoc</arg>
+						<!-- additional args -->
                     </args>
                     <plugins>
                         <plugin>
@@ -106,8 +109,42 @@ public class SampleModel {
 </project>
 ```
 
+### Options
+
+#### Formatting
+
+You can use *regex* replacement to customize generated javadoc:
+```xml
+<args>
+	<arg>-Xjavadoc</arg>
+		<arg>-Xjavadoc-formatting</arg>
+			<arg>-Xjavadoc-formatting-replace=...</arg>
+			<arg>-Xjavadoc-formatting-by=...</arg>
+			<arg>-Xjavadoc-formatting-replace=...</arg>
+			<arg>-Xjavadoc-formatting-by=...</arg>
+			<!-- ... -->
+</args>
+```
+
+*Default:*
+* remove indentation;
+* remove first+last empty lines;
+* add `<br>` end line.
+
+#### Strategy
+
+```xml
+<args>
+	<arg>-Xjavadoc</arg>
+		<arg>-Xjavadoc-strategy=...</arg>
+</args>
+```
+where `...` can be:
+* `APPEND_BEGIN`;
+* `REPLACE`.
+
+*Default:* `REPLACE`.
+
 ## TODO
 
-* *Formatter* (text, HTML, Markdown, ...)
-* *Strategy* (replace, append, ...)
 * *Target* (field, getter, setter, ...)

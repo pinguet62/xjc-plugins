@@ -63,6 +63,7 @@ Optional `binding.xjb`:
                     <!-- ... -->
                     <args>
                         <arg>-Xlisttoset</arg>
+						<!-- additional args -->
                     </args>
                     <plugins>
                         <plugin>
@@ -77,6 +78,20 @@ Optional `binding.xjb`:
     </build>
 </project>
 ```
+
+### Options
+
+#### Process all
+
+To process all properties:
+```xml
+<args>
+	<arg>-Xlisttoset</arg>
+		<arg>-Xlisttoset-processAll</arg>
+</args>
+```
+
+*Default:* disabled.
 
 ## TODO
 

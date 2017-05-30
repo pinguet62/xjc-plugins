@@ -4,52 +4,29 @@ import static fr.pinguet62.xjc.common.test.JavaParserUtils.findAnnotation;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findArgument;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findEntry;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findField;
-import static org.apache.commons.io.FileUtils.deleteDirectory;
+import static fr.pinguet62.xjc.swagger.SwaggerPluginTestRunner.runDriverAndParseClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.nio.file.Paths;
 
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseException;
-import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.BooleanLiteralExpr;
 import com.github.javaparser.ast.expr.StringLiteralExpr;
-import com.sun.tools.xjc.Driver;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 public class SwaggerPluginTest {
-
-    @BeforeClass
-    public static void clearAndGenerate() throws Exception {
-        deleteDirectory(new File("target/fr/pinguet62"));
-        Driver.run(new String[] { "src/test/resources/model.xsd", "-Xswagger", "-d", "target" }, System.out, System.out);
-    }
-
-    private static TypeDeclaration parseClass(String name) {
-        try {
-            CompilationUnit compilationUnit = JavaParser.parse(Paths.get("target/fr/pinguet62/" + name + ".java").toFile());
-            return compilationUnit.getTypes().get(0);
-        } catch (ParseException | IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     /**
      * @see ApiModel#description()
@@ -58,7 +35,7 @@ public class SwaggerPluginTest {
     @Test
     public void test_comments() {
         // Class
-        TypeDeclaration commentType = parseClass("CommentClass");
+        TypeDeclaration commentType = runDriverAndParseClass("CommentClass");
         // * class
         assertEquals("Comment of xs:element CommentType",
                 ((StringLiteralExpr) findArgument(findAnnotation(commentType, ApiModel.class), "description")).getValue());
@@ -68,7 +45,7 @@ public class SwaggerPluginTest {
         assertNull((findArgument(findAnnotation(findField(commentType, "uncommentedAttr"), ApiModelProperty.class), "value")));
 
         // Enum
-        TypeDeclaration enumType = parseClass("EnumCommentClass");
+        TypeDeclaration enumType = runDriverAndParseClass("EnumCommentClass");
         // * class
         assertEquals("Comment of xs:simpleType EnumCommentClass",
                 ((StringLiteralExpr) findArgument(findAnnotation(enumType, ApiModel.class), "description")).getValue());
@@ -84,7 +61,7 @@ public class SwaggerPluginTest {
     /** @see ApiModelProperty#dataType() */
     @Test
     public void test_dataType() {
-        TypeDeclaration type = parseClass("AllTypesClass");
+        TypeDeclaration type = runDriverAndParseClass("AllTypesClass");
 
         // List of attribute name and dataType value
         // @formatter:off
@@ -118,7 +95,7 @@ public class SwaggerPluginTest {
     /** @see ApiModelProperty#required() */
     @Test
     public void test_required() {
-        TypeDeclaration requiredType = parseClass("RequiredClass");
+        TypeDeclaration requiredType = runDriverAndParseClass("RequiredClass");
         Class<ApiModelProperty> annotation = ApiModelProperty.class;
 
         assertFalse(((BooleanLiteralExpr) findArgument(findAnnotation(findField(requiredType, "optionalAttr"), annotation),

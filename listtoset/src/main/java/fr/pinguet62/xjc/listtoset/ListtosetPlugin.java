@@ -29,6 +29,9 @@ import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 
 import fr.pinguet62.xjc.common.Utils;
+import fr.pinguet62.xjc.common.argparser.BooleanArgumentParser;
+import fr.pinguet62.xjc.common.argparser.CompositeArgumentParser;
+import fr.pinguet62.xjc.common.argparser.IgnorePluginArgument;
 
 public class ListtosetPlugin extends Plugin {
 
@@ -36,7 +39,9 @@ public class ListtosetPlugin extends Plugin {
 
     public static final QName CHANGE_PROPERTY_TYPE_TO_SET = new QName(_NAMESPACE_URI, "typeSet");
 
-    private static boolean processAll = false;
+    private static final String PREFIX = "Xlisttoset";
+
+    private final BooleanArgumentParser optProcessAll = new BooleanArgumentParser("-" + PREFIX + "-processAll", false);
 
     @Override
     public List<String> getCustomizationURIs() {
@@ -45,12 +50,13 @@ public class ListtosetPlugin extends Plugin {
 
     @Override
     public String getOptionName() {
-        return "Xlisttoset";
+        return PREFIX;
     }
 
     @Override
     public String getUsage() {
-        return "  -" + getOptionName() + "            : Change java.util.List properties to java.util.Set";
+        return "  -" + getOptionName() + "            : Change " + List.class.getName() + " properties to "
+                + Set.class.getName();
     }
 
     @Override
@@ -58,25 +64,9 @@ public class ListtosetPlugin extends Plugin {
         return new QName(nsUri, localName).equals(CHANGE_PROPERTY_TYPE_TO_SET);
     }
 
-    /** Additional arguments must start with {@link #getOptionName()}, and key separated with {@code "-"} character. */
     @Override
     public int parseArgument(Options opt, String[] args, int start) throws BadCommandLineException, IOException {
-        String nextArg = args[start];
-
-        // No other args
-        String prefix = "-" + getOptionName() + "-";
-        if (!nextArg.startsWith(prefix))
-            return 0;
-
-        String arg = nextArg.substring(prefix.length());
-        switch (arg) {
-            case "processAll":
-                processAll = true;
-                break;
-            default:
-                throw new UnsupportedOperationException("Unknown argument: " + arg);
-        }
-        return 1;
+        return new CompositeArgumentParser(new IgnorePluginArgument("-" + PREFIX), optProcessAll).parse(args, start);
     }
 
     private void processField(Outline outline, ClassOutline classOutline, FieldOutline fieldOutline) {
@@ -84,7 +74,7 @@ public class ListtosetPlugin extends Plugin {
         JFieldVar fieldVar = classOutline.implClass.fields().get(fieldOutline.getPropertyInfo().getName(false));
 
         if (!fieldVar.type().toString().contains("List<"))
-            if (!processAll)
+            if (!optProcessAll.getValue())
                 throw new RuntimeException("Can only applied on maxOccurs=\"unbounded\" properties: "
                         + classOutline.implClass.name() + "#" + fieldVar.name());
             else
@@ -116,7 +106,7 @@ public class ListtosetPlugin extends Plugin {
     public boolean run(Outline outline, Options options, ErrorHandler errorHandler) throws SAXException {
         for (ClassOutline classOutline : outline.getClasses())
             for (FieldOutline fieldOutline : classOutline.getDeclaredFields())
-                if (processAll)
+                if (optProcessAll.getValue())
                     processField(outline, classOutline, fieldOutline);
                 else
                     for (CPluginCustomization customization : fieldOutline.getPropertyInfo().getCustomizations()) {

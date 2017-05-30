@@ -3,12 +3,17 @@ package fr.pinguet62.xjc.javadoc;
 import static fr.pinguet62.xjc.common.Utils.getDocumentation;
 import static fr.pinguet62.xjc.common.Utils.getMethod;
 import static fr.pinguet62.xjc.common.Utils.resolveIndirectAccessToField;
+import static fr.pinguet62.xjc.javadoc.option.Formatting.DEFAULT;
+import static fr.pinguet62.xjc.javadoc.option.Strategy.REPLACE;
+
+import java.io.IOException;
 
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
+import com.sun.tools.xjc.BadCommandLineException;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.outline.ClassOutline;
@@ -18,13 +23,23 @@ import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 import com.sun.xml.xsom.XSComponent;
 
-import fr.pinguet62.xjc.common.DocumentationFormatterStrategy;
+import fr.pinguet62.xjc.common.argparser.CompositeArgumentParser;
+import fr.pinguet62.xjc.common.argparser.EnumParser;
+import fr.pinguet62.xjc.common.argparser.IgnorePluginArgument;
+import fr.pinguet62.xjc.common.argparser.RegexParser;
+import fr.pinguet62.xjc.javadoc.option.Strategy;
 
 public class JavadocPlugin extends Plugin {
 
+    private static final String PREFIX = "Xjavadoc";
+
+    private final RegexParser optFormatting = new RegexParser("-" + PREFIX + "-formatting", DEFAULT);
+
+    private final EnumParser<Strategy> optStrategy = new EnumParser<>("-" + PREFIX + "-strategy=", Strategy.class, REPLACE);
+
     @Override
     public String getOptionName() {
-        return "Xjavadoc";
+        return PREFIX;
     }
 
     @Override
@@ -33,18 +48,20 @@ public class JavadocPlugin extends Plugin {
     }
 
     @Override
-    public boolean run(Outline outline, Options options, ErrorHandler errorHandler) throws SAXException {
-        // TODO Maven configuration
-        DocumentationFormatterStrategy formatter = DocumentationFormatterStrategy.getDefault();
-        JavadocRemplacementStrategy javadocApplier = JavadocRemplacementStrategy.determineStrategy("replace");
+    public int parseArgument(Options opt, String[] args, int start) throws BadCommandLineException, IOException {
+        return new CompositeArgumentParser(new IgnorePluginArgument("-" + PREFIX), optStrategy, optFormatting).parse(args,
+                start);
+    }
 
+    @Override
+    public boolean run(Outline outline, Options options, ErrorHandler errorHandler) throws SAXException {
         // Classes
         for (ClassOutline classOutline : outline.getClasses()) {
             // Class
             String classDocumentation = getDocumentation(classOutline.target.getSchemaComponent());
             if (classDocumentation != null)
-                classDocumentation = formatter.process(classDocumentation);
-            javadocApplier.apply(classOutline.ref.javadoc(), classDocumentation);
+                classDocumentation = optFormatting.transform(classDocumentation);
+            optStrategy.getSelected().apply(classOutline.ref.javadoc(), classDocumentation);
 
             // Fields
             for (FieldOutline fieldOutline : classOutline.getDeclaredFields()) {
@@ -52,11 +69,11 @@ public class JavadocPlugin extends Plugin {
 
                 String propertyDocumentation = getDocumentation(schemaComponent);
                 if (propertyDocumentation != null)
-                    propertyDocumentation = formatter.process(propertyDocumentation);
+                    propertyDocumentation = optFormatting.transform(propertyDocumentation);
 
                 // Field
                 JFieldVar fieldVar = classOutline.implClass.fields().get(fieldOutline.getPropertyInfo().getName(false));
-                javadocApplier.apply(fieldVar.javadoc(), propertyDocumentation);
+                optStrategy.getSelected().apply(fieldVar.javadoc(), propertyDocumentation);
 
                 // Getter
                 String getterName = "get" + fieldOutline.getPropertyInfo().getName(true);
@@ -66,13 +83,13 @@ public class JavadocPlugin extends Plugin {
                     getterName = getterName.replaceFirst("^get", "is");
                     getter = getMethod(classOutline, getterName);
                 }
-                javadocApplier.apply(getter.javadoc(), propertyDocumentation);
+                optStrategy.getSelected().apply(getter.javadoc(), propertyDocumentation);
 
                 // Setter
                 JMethod setter = getMethod(classOutline, "set" + fieldOutline.getPropertyInfo().getName(true));
                 if (setter == null) // one-to-many has only getter
                     continue;
-                javadocApplier.apply(setter.javadoc(), propertyDocumentation);
+                optStrategy.getSelected().apply(setter.javadoc(), propertyDocumentation);
             }
         }
 
@@ -81,15 +98,15 @@ public class JavadocPlugin extends Plugin {
             // Class
             String classDocumentation = getDocumentation(enumOutline.target.getSchemaComponent());
             if (classDocumentation != null)
-                classDocumentation = formatter.process(classDocumentation);
-            javadocApplier.apply(enumOutline.clazz.javadoc(), classDocumentation);
+                classDocumentation = optFormatting.transform(classDocumentation);
+            optStrategy.getSelected().apply(enumOutline.clazz.javadoc(), classDocumentation);
 
             // Values
             for (EnumConstantOutline enumConstantOutline : enumOutline.constants) {
                 String fieldDocumentation = getDocumentation(enumConstantOutline.target.getSchemaComponent());
                 if (fieldDocumentation != null)
-                    fieldDocumentation = formatter.process(fieldDocumentation);
-                javadocApplier.apply(enumConstantOutline.constRef.javadoc(), fieldDocumentation);
+                    fieldDocumentation = optFormatting.transform(fieldDocumentation);
+                optStrategy.getSelected().apply(enumConstantOutline.constRef.javadoc(), fieldDocumentation);
             }
         }
 

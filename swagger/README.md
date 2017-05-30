@@ -67,6 +67,7 @@ public class SampleModel {
                     <!-- ... -->
                     <args>
                         <arg>-Xswagger</arg>
+						<!-- additional args -->
                     </args>
                     <plugins>
                         <plugin>
@@ -82,8 +83,22 @@ public class SampleModel {
 </project>
 ```
 
+### Options
+
+#### Value strategy
+
+```xml
+<args>
+	<arg>-Xswagger</arg>
+		<arg>-Xswagger-dataTypeStrategy=...</arg>
+</args>
+```
+where `...` can be:
+* `FULL_NAME`: for *fully qualified* class name;
+* `SIMPLE_NAME`: default Swagger strategy.
+
+*Default:* `FULL_NAME`.
+
 ## TODO
 
 * JAXB `XmlAccessType` support: `FIELD`, `PROPERTY`, `PUBLIC_MEMBER` or `NONE`
-* `@ApiModelProperty(dataType)` conversion
-* Javadoc options: formatter & strategy
