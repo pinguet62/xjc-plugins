@@ -1,26 +1,24 @@
 package fr.pinguet62.xjc.common.argparser;
 
+/** {@link ArgumentParser} to check if argument is present. */
 public class BooleanArgumentParser implements ArgumentParser {
 
-    private final boolean defaultValue;
+    private final String argumentName;
 
-    private final String option;
+    private boolean present;
 
-    private Boolean value;
-
-    public BooleanArgumentParser(String option, boolean defaultValue) {
-        this.option = option;
-        this.defaultValue = defaultValue;
+    public BooleanArgumentParser(String argumentName) {
+        this.argumentName = argumentName;
     }
 
-    public boolean getValue() {
-        return value == null ? defaultValue : value;
+    public boolean isPresent() {
+        return present;
     }
 
     @Override
     public int parse(String[] args, int start) {
-        value = args[start].equals(option);
-        return value ? 1 : 0;
+        present = args[start].equals(argumentName);
+        return present ? 1 : 0;
     }
 
 }

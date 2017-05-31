@@ -23,19 +23,19 @@ import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 import com.sun.xml.xsom.XSComponent;
 
+import fr.pinguet62.xjc.common.argparser.ArgumentParser;
 import fr.pinguet62.xjc.common.argparser.CompositeArgumentParser;
-import fr.pinguet62.xjc.common.argparser.EnumParser;
-import fr.pinguet62.xjc.common.argparser.IgnorePluginArgument;
-import fr.pinguet62.xjc.common.argparser.RegexParser;
+import fr.pinguet62.xjc.common.argparser.EnumArgumentParser;
+import fr.pinguet62.xjc.common.argparser.RegexArgumentParser;
 import fr.pinguet62.xjc.javadoc.option.Strategy;
 
 public class JavadocPlugin extends Plugin {
 
     private static final String PREFIX = "Xjavadoc";
 
-    private final RegexParser optFormatting = new RegexParser("-" + PREFIX + "-formatting", DEFAULT);
+    private final RegexArgumentParser optFormatting = new RegexArgumentParser("formatting", DEFAULT);
 
-    private final EnumParser<Strategy> optStrategy = new EnumParser<>("-" + PREFIX + "-strategy=", Strategy.class, REPLACE);
+    private final EnumArgumentParser<Strategy> optStrategy = new EnumArgumentParser<>("strategy=", Strategy.class, REPLACE);
 
     @Override
     public String getOptionName() {
@@ -49,8 +49,8 @@ public class JavadocPlugin extends Plugin {
 
     @Override
     public int parseArgument(Options opt, String[] args, int start) throws BadCommandLineException, IOException {
-        return new CompositeArgumentParser(new IgnorePluginArgument("-" + PREFIX), optStrategy, optFormatting).parse(args,
-                start);
+        ArgumentParser parser = new CompositeArgumentParser("-" + PREFIX, optStrategy, optFormatting).ignoringFirst();
+        return parser.parse(args, start);
     }
 
     @Override

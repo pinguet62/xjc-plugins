@@ -19,7 +19,7 @@ public class CompositeArgumentParserTest {
      */
     @Test
     public void test() {
-        String[] args = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        String[] args = { "X-0", "X-1", "X-2", "X-3", "X-4", "X-5", "X-6", "X-7", "X-8", "X-9" };
 
         ArgumentParser ignored = new ArgumentParser() {
             @Override
@@ -53,11 +53,27 @@ public class CompositeArgumentParserTest {
             }
         };
 
-        CompositeArgumentParser compositeArgumentParser = new CompositeArgumentParser(ignored, process3,
+        CompositeArgumentParser compositeArgumentParser = new CompositeArgumentParser("X", ignored, process3,
                 ignoreFirstThenProcess2);
         int consumed = compositeArgumentParser.parse(args, 3/* start */);
 
         assertEquals(3 + 2, consumed);
+    }
+
+    @Test
+    public void test_argumentAndPrefix() {
+        CompositeArgumentParser parser = new CompositeArgumentParser("Xxxx", new BooleanArgumentParser("aaa"),
+                new BooleanArgumentParser("bbb"));
+        int consumed = parser.parse(new String[] { "Xxxx-aaa", "Xxxx-bbb" }, 0);
+        assertEquals(2, consumed);
+    }
+
+    @Test
+    public void test_ignoreFirst() {
+        CompositeArgumentParser parser = new CompositeArgumentParser("Xxxx", new BooleanArgumentParser("aaa"),
+                new BooleanArgumentParser("bbb")).ignoringFirst();
+        int consumed = parser.parse(new String[] { "Xxxx", "Xxxx-aaa", "Xxxx-bbb" }, 0);
+        assertEquals(3, consumed);
     }
 
 }

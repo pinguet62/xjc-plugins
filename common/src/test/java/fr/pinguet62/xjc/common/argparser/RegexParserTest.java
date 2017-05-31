@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import fr.pinguet62.xjc.common.argparser.RegexParser.Replacement;
+import fr.pinguet62.xjc.common.argparser.RegexArgumentParser.Replacement;
 
-/** @see RegexParser */
+/** @see RegexArgumentParser */
 public class RegexParserTest {
 
     private static final String PREFIX = "-Xfoo";
@@ -15,7 +15,7 @@ public class RegexParserTest {
     public void test_parse() {
         String[] args = { "*", "*", PREFIX + "-regex-replace=foo", PREFIX + "-regex-by=bar", PREFIX + "-regex-replace=first",
                 PREFIX + "-regex-by=second", "*" };
-        RegexParser parser = new RegexParser(PREFIX);
+        RegexArgumentParser parser = new RegexArgumentParser(PREFIX);
         int consumed = parser.parse(args, 2);
         assertEquals(4, consumed);
         assertEquals("foo", parser.getReplacements().get(0).replace);
@@ -26,7 +26,7 @@ public class RegexParserTest {
 
     @Test
     public void test_transform() {
-        RegexParser parser = new RegexParser(PREFIX);
+        RegexArgumentParser parser = new RegexArgumentParser(PREFIX);
         parser.getReplacements().clear();
         parser.getReplacements().add(new Replacement("\r?\n", "<br>"));
         parser.getReplacements().add(new Replacement("\\* ", "<li>"));

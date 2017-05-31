@@ -21,10 +21,10 @@ import com.sun.tools.xjc.outline.Outline;
 import com.sun.xml.xsom.XSComponent;
 
 import fr.pinguet62.xjc.common.Utils;
+import fr.pinguet62.xjc.common.argparser.ArgumentParser;
 import fr.pinguet62.xjc.common.argparser.CompositeArgumentParser;
-import fr.pinguet62.xjc.common.argparser.EnumParser;
-import fr.pinguet62.xjc.common.argparser.IgnorePluginArgument;
-import fr.pinguet62.xjc.common.argparser.RegexParser;
+import fr.pinguet62.xjc.common.argparser.EnumArgumentParser;
+import fr.pinguet62.xjc.common.argparser.RegexArgumentParser;
 import fr.pinguet62.xjc.swagger.option.DataTypeStrategy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -33,10 +33,10 @@ public class SwaggerPlugin extends Plugin {
 
     private static final String PREFIX = "Xswagger";
 
-    private final EnumParser<DataTypeStrategy> optClassStrategy = new EnumParser<>("-" + PREFIX + "-dataTypeStrategy=",
+    private final EnumArgumentParser<DataTypeStrategy> optClassStrategy = new EnumArgumentParser<>("dataTypeStrategy=",
             DataTypeStrategy.class, FULL_NAME);
 
-    private final RegexParser optFormatting = new RegexParser("-" + PREFIX + "-formatting", DEFAULT);
+    private final RegexArgumentParser optFormatting = new RegexArgumentParser("formatting", DEFAULT);
 
     private String getAndFormatDocumentation(XSComponent schemaComponent) {
         String documentation = Utils.getDocumentation(schemaComponent);
@@ -58,8 +58,8 @@ public class SwaggerPlugin extends Plugin {
 
     @Override
     public int parseArgument(Options opt, String[] args, int start) throws BadCommandLineException, IOException {
-        return new CompositeArgumentParser(new IgnorePluginArgument("-" + PREFIX), optClassStrategy, optFormatting).parse(args,
-                start);
+        ArgumentParser parser = new CompositeArgumentParser("-" + PREFIX, optClassStrategy, optFormatting).ignoringFirst();
+        return parser.parse(args, start);
     }
 
     @Override

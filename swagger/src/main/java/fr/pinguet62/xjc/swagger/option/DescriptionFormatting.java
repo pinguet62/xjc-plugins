@@ -4,7 +4,7 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import fr.pinguet62.xjc.common.argparser.RegexParser.Replacement;
+import fr.pinguet62.xjc.common.argparser.RegexArgumentParser.Replacement;
 
 public class DescriptionFormatting {
 

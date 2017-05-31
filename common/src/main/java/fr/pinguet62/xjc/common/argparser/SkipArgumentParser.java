@@ -1,10 +1,10 @@
 package fr.pinguet62.xjc.common.argparser;
 
-public class IgnorePluginArgument implements ArgumentParser {
+public class SkipArgumentParser implements ArgumentParser {
 
     private final String option;
 
-    public IgnorePluginArgument(String option) {
+    public SkipArgumentParser(String option) {
         this.option = option;
     }
 

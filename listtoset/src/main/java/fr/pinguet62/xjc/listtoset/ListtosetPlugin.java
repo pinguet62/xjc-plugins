@@ -29,9 +29,9 @@ import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 
 import fr.pinguet62.xjc.common.Utils;
+import fr.pinguet62.xjc.common.argparser.ArgumentParser;
 import fr.pinguet62.xjc.common.argparser.BooleanArgumentParser;
 import fr.pinguet62.xjc.common.argparser.CompositeArgumentParser;
-import fr.pinguet62.xjc.common.argparser.IgnorePluginArgument;
 
 public class ListtosetPlugin extends Plugin {
 
@@ -41,7 +41,7 @@ public class ListtosetPlugin extends Plugin {
 
     private static final String PREFIX = "Xlisttoset";
 
-    private final BooleanArgumentParser optProcessAll = new BooleanArgumentParser("-" + PREFIX + "-processAll", false);
+    private final BooleanArgumentParser optProcessAll = new BooleanArgumentParser("processAll");
 
     @Override
     public List<String> getCustomizationURIs() {
@@ -66,7 +66,8 @@ public class ListtosetPlugin extends Plugin {
 
     @Override
     public int parseArgument(Options opt, String[] args, int start) throws BadCommandLineException, IOException {
-        return new CompositeArgumentParser(new IgnorePluginArgument("-" + PREFIX), optProcessAll).parse(args, start);
+        ArgumentParser parser = new CompositeArgumentParser("-" + PREFIX, optProcessAll).ignoringFirst();
+        return parser.parse(args, start);
     }
 
     private void processField(Outline outline, ClassOutline classOutline, FieldOutline fieldOutline) {
@@ -74,7 +75,7 @@ public class ListtosetPlugin extends Plugin {
         JFieldVar fieldVar = classOutline.implClass.fields().get(fieldOutline.getPropertyInfo().getName(false));
 
         if (!fieldVar.type().toString().contains("List<"))
-            if (!optProcessAll.getValue())
+            if (!optProcessAll.isPresent())
                 throw new RuntimeException("Can only applied on maxOccurs=\"unbounded\" properties: "
                         + classOutline.implClass.name() + "#" + fieldVar.name());
             else
@@ -106,7 +107,7 @@ public class ListtosetPlugin extends Plugin {
     public boolean run(Outline outline, Options options, ErrorHandler errorHandler) throws SAXException {
         for (ClassOutline classOutline : outline.getClasses())
             for (FieldOutline fieldOutline : classOutline.getDeclaredFields())
-                if (optProcessAll.getValue())
+                if (optProcessAll.isPresent())
                     processField(outline, classOutline, fieldOutline);
                 else
                     for (CPluginCustomization customization : fieldOutline.getPropertyInfo().getCustomizations()) {

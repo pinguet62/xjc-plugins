@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Multiple replace/by arguments.
+ * {@link ArgumentParser} to list multiple replace/by arguments.
  * <p>
  * Example: to replace {@code "A"} by {@code "B"} and {@code "X"} by {@code "Y"}:
  *
@@ -16,7 +16,7 @@ import java.util.List;
  *         -X...-regex-by=Y
  * </pre>
  */
-public class RegexParser implements ArgumentParser {
+public class RegexArgumentParser implements ArgumentParser {
 
     public static class Replacement {
         String by;
@@ -29,18 +29,18 @@ public class RegexParser implements ArgumentParser {
         }
     }
 
-    private final List<Replacement> defaultReplacements;
+    private final String argumentName;
 
-    private final String prefix;
+    private final List<Replacement> defaultReplacements;
 
     private final List<Replacement> replacements = new ArrayList<>();
 
-    public RegexParser(String prefix) {
+    public RegexArgumentParser(String prefix) {
         this(prefix, new ArrayList<Replacement>());
     }
 
-    public RegexParser(String prefix, List<Replacement> defaultReplacements) {
-        this.prefix = prefix;
+    public RegexArgumentParser(String argumentName, List<Replacement> defaultReplacements) {
+        this.argumentName = argumentName;
         this.defaultReplacements = defaultReplacements;
     }
 
@@ -51,12 +51,13 @@ public class RegexParser implements ArgumentParser {
     // TODO secured parsing
     @Override
     public int parse(String[] args, int start) {
-        final String prefix = this.prefix + "-regex-";
+        final String argumentName = this.argumentName + "-regex-";
+
         int consumed = 0;
         String arg;
-        while (start + consumed < args.length & (arg = args[start + consumed]).startsWith(prefix)) {
+        while (start + consumed < args.length && (arg = args[start + consumed]).startsWith(argumentName)) {
             consumed++;
-            arg = arg.substring(prefix.length());
+            arg = arg.substring(argumentName.length());
             if (arg.startsWith("replace=")) {
                 arg = arg.substring("replace=".length());
                 replacements.add(new Replacement(arg, null));
@@ -72,7 +73,8 @@ public class RegexParser implements ArgumentParser {
     /**
      * @param input
      *            The {@link String} to process.
-     * @return The new processed {@link String}.
+     * @return The processed {@link String}.
+     * @see String#replaceAll(String, String)
      */
     public String transform(String input) {
         List<Replacement> replacementsToApply = replacements;
