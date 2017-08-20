@@ -114,7 +114,13 @@ public class JavaParserUtils {
         return null;
     }
 
-    /** Remove all {@code "*"} and empty first & last lines. */
+    /**
+     * Remove all {@code "*"} and empty first &amp; last lines.
+     *
+     * @param comment
+     *            The initial text.
+     * @return The formated text.
+     */
     public static final List<String> formatComments(Comment comment) {
         String[] lines = comment.getContent().split("\r?\n");
         List<String> comments = new ArrayList<>();
