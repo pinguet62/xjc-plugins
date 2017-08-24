@@ -15,8 +15,8 @@
 	<name>Integration testing</name>
 
 	<modules>
-		<module>other-plugins</module>
-		<module>transitive-dependencies</module>
+		<module>xjc-test-other-plugins</module>
+		<module>xjc-test-transitive-dependencies</module>
 	</modules>
 
 	<properties>
