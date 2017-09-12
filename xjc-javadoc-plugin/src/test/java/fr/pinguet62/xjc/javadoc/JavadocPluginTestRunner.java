@@ -10,14 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseException;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.sun.tools.xjc.Driver;
 
 public class JavadocPluginTestRunner {
 
-    public static TypeDeclaration runDriverAndParseClass(String className, String... additionalArgs) {
+    public static TypeDeclaration<?> runDriverAndParseClass(String className, String... additionalArgs) {
         // Run plugin
         List<String> args = new ArrayList<>(asList("src/test/resources/model.xsd", "-Xjavadoc"));
         args.addAll(asList(additionalArgs));
@@ -35,7 +34,7 @@ public class JavadocPluginTestRunner {
             CompilationUnit compilationUnit = JavaParser
                     .parse(Paths.get("target/fr/pinguet62/" + className + ".java").toFile());
             return compilationUnit.getTypes().get(0);
-        } catch (ParseException | IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

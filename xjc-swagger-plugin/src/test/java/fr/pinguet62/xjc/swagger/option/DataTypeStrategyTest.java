@@ -1,8 +1,7 @@
 package fr.pinguet62.xjc.swagger.option;
 
-import static fr.pinguet62.xjc.common.test.JavaParserUtils.findAnnotation;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findArgument;
-import static fr.pinguet62.xjc.common.test.JavaParserUtils.findField;
+import static fr.pinguet62.xjc.common.test.JavaParserUtils.findFieldAnnotation;
 import static fr.pinguet62.xjc.swagger.SwaggerPluginTestRunner.runDriverAndParseClass;
 import static fr.pinguet62.xjc.swagger.option.DataTypeStrategy.SIMPLE_NAME;
 import static org.junit.Assert.assertEquals;
@@ -22,10 +21,10 @@ public class DataTypeStrategyTest {
     public void test_custom() {
         String[] args = { "-Xswagger-dataTypeStrategy=" + SIMPLE_NAME.name() };
 
-        TypeDeclaration type = runDriverAndParseClass("AllTypesClass", args);
+        TypeDeclaration<?> type = runDriverAndParseClass("AllTypesClass", args);
 
         assertEquals("BigDecimal",
-                ((StringLiteralExpr) findArgument(findAnnotation(findField(type, "decimalAttr"), ApiModelProperty.class),
+                ((StringLiteralExpr) findArgument(findFieldAnnotation(type, "decimalAttr", ApiModelProperty.class),
                         "dataType")).getValue());
     }
 
@@ -33,10 +32,10 @@ public class DataTypeStrategyTest {
     public void test_default() {
         String[] args = {};
 
-        TypeDeclaration type = runDriverAndParseClass("AllTypesClass", args);
+        TypeDeclaration<?> type = runDriverAndParseClass("AllTypesClass", args);
 
         assertEquals("java.math.BigDecimal",
-                ((StringLiteralExpr) findArgument(findAnnotation(findField(type, "decimalAttr"), ApiModelProperty.class),
+                ((StringLiteralExpr) findArgument(findFieldAnnotation(type, "decimalAttr", ApiModelProperty.class),
                         "dataType")).getValue());
     }
 

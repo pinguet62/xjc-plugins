@@ -20,9 +20,9 @@ public class StrategyTest {
     public void test_custom() {
         String[] args = { "-Xjavadoc-strategy=" + APPEND_BEGIN.name() };
 
-        TypeDeclaration type = runDriverAndParseClass("CommentedClass", args);
+        TypeDeclaration<?> type = runDriverAndParseClass("CommentedClass", args);
 
-        List<String> comments = formatComments(type.getComment());
+        List<String> comments = formatComments(type.getComment().get());
         assertEquals("Comment of xs:element CommentedClass", comments.get(0));
         assertEquals("", comments.get(1));
         assertTrue(comments.get(2).matches("<p>.*CommentedClass.*"));
@@ -34,9 +34,9 @@ public class StrategyTest {
     public void test_default() {
         String[] args = {};
 
-        TypeDeclaration type = runDriverAndParseClass("CommentedClass", args);
+        TypeDeclaration<?> type = runDriverAndParseClass("CommentedClass", args);
 
-        List<String> comments = formatComments(type.getComment());
+        List<String> comments = formatComments(type.getComment().get());
         assertEquals(1, comments.size());
         assertEquals("Comment of xs:element CommentedClass", comments.get(0));
     }

@@ -2,7 +2,6 @@ package fr.pinguet62.xjc.common.test;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Repeatable;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +30,62 @@ public class JavaParserUtils {
      * @return The first found (doesn't support {@link Repeatable}).<br>
      *         {@code null} if not found.
      */
-    public static AnnotationExpr findAnnotation(BodyDeclaration enumConstant, Class<? extends Annotation> annotation) {
+    public static AnnotationExpr findAnnotation(BodyDeclaration<?> enumConstant, Class<? extends Annotation> annotation) {
         for (AnnotationExpr a : enumConstant.getAnnotations())
-            if (a.getName().getName().equals(annotation.getSimpleName()))
+            if (a.getName().getIdentifier().equals(annotation.getSimpleName()))
                 return a;
+        return null;
+    }
+
+    /**
+     * @param type
+     *            The {@link TypeDeclaration} on which search.
+     * @param name
+     *            The {@link VariableDeclarator#getName() field name} to search.
+     * @param annotation
+     *            The {@link AnnotationExpr#getName() annotation name} type to search.
+     * @return The first found (doesn't support {@link Repeatable}).<br>
+     *         {@code null} if not found.
+     */
+    public static AnnotationExpr findFieldAnnotation(TypeDeclaration<?> type, String name, Class<? extends Annotation> annotation) {
+        for (BodyDeclaration<?> member : type.getMembers())
+            if (member instanceof FieldDeclaration) {
+                FieldDeclaration field = (FieldDeclaration) member;
+                for (VariableDeclarator variableDeclarator : field.getVariables())
+                    if (variableDeclarator.getName().getIdentifier().equals(name)) {
+                        for (AnnotationExpr a : field.getAnnotations())
+                            if (a.getName().getIdentifier().equals(annotation.getSimpleName()))
+                                return a;
+                        return null;
+                    }
+            }
+        return null;
+    }
+
+    /**
+     * @param type
+     *            The {@link TypeDeclaration} on which search.
+     * @param name
+     *            The {@link VariableDeclarator#getName() field name} to search.
+     * @param annotation
+     *            The {@link AnnotationExpr#getName() annotation name} type to search.
+     * @return The first found (doesn't support {@link Repeatable}).<br>
+     *         {@code null} if not found.
+     */
+    public static Comment findFieldComment(TypeDeclaration<?> type, String name) {
+        if (type instanceof EnumDeclaration) {
+            EnumDeclaration enumDeclaration = (EnumDeclaration) type;
+            for (EnumConstantDeclaration enumConstantDeclaration : enumDeclaration.getEntries())
+                if (enumConstantDeclaration.getName().getIdentifier().equals(name))
+                    return enumConstantDeclaration.getComment().orElse(null);
+        } else
+            for (BodyDeclaration<?> member : type.getMembers())
+                if (member instanceof FieldDeclaration) {
+                    FieldDeclaration field = (FieldDeclaration) member;
+                    for (VariableDeclarator variableDeclarator : field.getVariables())
+                        if (variableDeclarator.getName().getIdentifier().equals(name))
+                            return variableDeclarator.getComment().orElse(field.getComment().orElse(null));
+                }
         return null;
     }
 
@@ -57,7 +108,7 @@ public class JavaParserUtils {
         } else if (annotation instanceof NormalAnnotationExpr) {
             NormalAnnotationExpr normalAnnotation = (NormalAnnotationExpr) annotation;
             for (MemberValuePair memberValue : normalAnnotation.getPairs())
-                if (memberValue.getName().equals(key))
+                if (memberValue.getName().getIdentifier().equals(key))
                     return memberValue.getValue();
             return null;
         } else
@@ -73,7 +124,7 @@ public class JavaParserUtils {
      */
     public static EnumConstantDeclaration findEntry(EnumDeclaration type, String entry) {
         for (EnumConstantDeclaration enumConstant : type.getEntries())
-            if (enumConstant.getName().equals(entry))
+            if (enumConstant.getName().getIdentifier().equals(entry))
                 return enumConstant;
         return null;
     }
@@ -82,16 +133,16 @@ public class JavaParserUtils {
      * @param type
      *            The {@link TypeDeclaration} on which search.
      * @param name
-     *            The {@link Field#getName() field name} to search.
+     *            The {@link VariableDeclarator#getName() field name} to search.
      * @return {@code null} if not found.
      */
-    public static FieldDeclaration findField(TypeDeclaration type, String name) {
-        for (BodyDeclaration member : type.getMembers())
+    public static VariableDeclarator findField(TypeDeclaration<?> type, String name) {
+        for (BodyDeclaration<?> member : type.getMembers())
             if (member instanceof FieldDeclaration) {
                 FieldDeclaration field = (FieldDeclaration) member;
-                VariableDeclarator variable = field.getVariables().get(0);
-                if (variable.getId().getName().equals(name))
-                    return field;
+                for (VariableDeclarator variableDeclarator : field.getVariables())
+                    if (variableDeclarator.getName().getIdentifier().equals(name))
+                        return variableDeclarator;
             }
         return null;
     }
@@ -104,11 +155,11 @@ public class JavaParserUtils {
      * @return The first found (naming collision).<br>
      *         {@code null} if not found.
      */
-    public static MethodDeclaration findMethod(TypeDeclaration type, String name) {
-        for (BodyDeclaration member : type.getMembers())
+    public static MethodDeclaration findMethod(TypeDeclaration<?> type, String name) {
+        for (BodyDeclaration<?> member : type.getMembers())
             if (member instanceof MethodDeclaration) {
                 MethodDeclaration method = (MethodDeclaration) member;
-                if (method.getName().equals(name))
+                if (method.getName().getIdentifier().equals(name))
                     return method;
             }
         return null;

@@ -17,8 +17,8 @@ public class FormattingTest {
     public void test_custom() {
         String[] args = { "-Xjavadoc-formatting-regex-replace=[a-z3469]", "-Xjavadoc-formatting-regex-by=" };
 
-        TypeDeclaration type = runDriverAndParseClass("FormattingClass", args);
-        List<String> lines = asList(type.getComment().getContent().split("\r?\n"));
+        TypeDeclaration<?> type = runDriverAndParseClass("FormattingClass", args);
+        List<String> lines = asList(type.getComment().get().getContent().split("\r?\n"));
         assertEquals(" * ", lines.get(1));
         assertEquals(" * ", lines.get(2));
         assertEquals(" * ", lines.get(3));
@@ -34,8 +34,8 @@ public class FormattingTest {
     /** @see Formatting#DEFAULT */
     @Test
     public void test_default() {
-        TypeDeclaration type = runDriverAndParseClass("FormattingClass");
-        List<String> lines = asList(type.getComment().getContent().split("\r?\n"));
+        TypeDeclaration<?> type = runDriverAndParseClass("FormattingClass");
+        List<String> lines = asList(type.getComment().get().getContent().split("\r?\n"));
         assertEquals(" *  3: a b c d e f g h i j k l m n o p q r s t u v w x y z<br>", lines.get(1));
         assertEquals(" *  4: a b c d e f g h i j k l m n o p q r s t u v w x y z<br>", lines.get(2));
         assertEquals(" * <br>", lines.get(3));
