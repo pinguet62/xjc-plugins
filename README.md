@@ -12,12 +12,12 @@
 
 ### Javadoc
 
-See [project](./javadoc/README.md).
+See [project](./xjc-javadoc-plugin/README.md).
 
 ### List-to-Set
 
-See [project](./listtoset/README.md).
+See [project](./xjc-listtoset-plugin/README.md).
 
 ### Swagger
 
-See [project](./swagger/README.md).
+See [project](./xjc-swagger-plugin/README.md).
