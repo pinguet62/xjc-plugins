@@ -67,8 +67,6 @@ public class JavaParserUtils {
      *            The {@link TypeDeclaration} on which search.
      * @param name
      *            The {@link VariableDeclarator#getName() field name} to search.
-     * @param annotation
-     *            The {@link AnnotationExpr#getName() annotation name} type to search.
      * @return The first found (doesn't support {@link Repeatable}).<br>
      *         {@code null} if not found.
      */

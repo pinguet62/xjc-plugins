@@ -23,9 +23,7 @@ public class DataTypeStrategyTest {
 
         TypeDeclaration<?> type = runDriverAndParseClass("AllTypesClass", args);
 
-        assertEquals("BigDecimal",
-                ((StringLiteralExpr) findArgument(findFieldAnnotation(type, "decimalAttr", ApiModelProperty.class),
-                        "dataType")).getValue());
+        assertEquals("BigDecimal", ((StringLiteralExpr) findArgument(findFieldAnnotation(type, "decimalAttr", ApiModelProperty.class), "dataType")).getValue());
     }
 
     @Test
@@ -34,9 +32,7 @@ public class DataTypeStrategyTest {
 
         TypeDeclaration<?> type = runDriverAndParseClass("AllTypesClass", args);
 
-        assertEquals("java.math.BigDecimal",
-                ((StringLiteralExpr) findArgument(findFieldAnnotation(type, "decimalAttr", ApiModelProperty.class),
-                        "dataType")).getValue());
+        assertEquals("java.math.BigDecimal", ((StringLiteralExpr) findArgument(findFieldAnnotation(type, "decimalAttr", ApiModelProperty.class), "dataType")).getValue());
     }
 
 }

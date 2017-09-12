@@ -37,25 +37,18 @@ public class SwaggerPluginTest {
         // Class
         TypeDeclaration<?> commentType = runDriverAndParseClass("CommentClass");
         // * class
-        assertEquals("Comment of xs:element CommentType",
-                ((StringLiteralExpr) findArgument(findAnnotation(commentType, ApiModel.class), "description")).getValue());
+        assertEquals("Comment of xs:element CommentType", ((StringLiteralExpr) findArgument(findAnnotation(commentType, ApiModel.class), "description")).getValue());
         // * field
-        assertEquals("Comment of xs:element attr", ((StringLiteralExpr) findArgument(
-                findFieldAnnotation(commentType, "commentedAttr", ApiModelProperty.class), "value")).getValue());
+        assertEquals("Comment of xs:element attr", ((StringLiteralExpr) findArgument(findFieldAnnotation(commentType, "commentedAttr", ApiModelProperty.class), "value")).getValue());
         assertNull((findArgument(findFieldAnnotation(commentType, "uncommentedAttr", ApiModelProperty.class), "value")));
 
         // Enum
         TypeDeclaration<?> enumType = runDriverAndParseClass("EnumCommentClass");
         // * class
-        assertEquals("Comment of xs:simpleType EnumCommentClass",
-                ((StringLiteralExpr) findArgument(findAnnotation(enumType, ApiModel.class), "description")).getValue());
+        assertEquals("Comment of xs:simpleType EnumCommentClass", ((StringLiteralExpr) findArgument(findAnnotation(enumType, ApiModel.class), "description")).getValue());
         // * entry
-        assertEquals("Comment of xs:enumeration",
-                ((StringLiteralExpr) findArgument(
-                        findAnnotation(findEntry((EnumDeclaration) enumType, "COMMENTED_VALUE"), ApiModelProperty.class),
-                        "value")).getValue());
-        assertNull(findArgument(
-                findAnnotation(findEntry((EnumDeclaration) enumType, "UNCOMMENTED_VALUE"), ApiModelProperty.class), "value"));
+        assertEquals("Comment of xs:enumeration", ((StringLiteralExpr) findArgument(findAnnotation(findEntry((EnumDeclaration) enumType, "COMMENTED_VALUE"), ApiModelProperty.class), "value")).getValue());
+        assertNull(findArgument(findAnnotation(findEntry((EnumDeclaration) enumType, "UNCOMMENTED_VALUE"), ApiModelProperty.class), "value"));
     }
 
     /** @see ApiModelProperty#dataType() */
@@ -86,9 +79,7 @@ public class SwaggerPluginTest {
         for (String[] attrValue : attrValues) {
             String attribute = attrValue[0];
             String dataType = attrValue[1];
-            assertEquals(dataType,
-                    ((StringLiteralExpr) findArgument(findFieldAnnotation(type, attribute, ApiModelProperty.class),
-                            "dataType")).getValue());
+            assertEquals(dataType, ((StringLiteralExpr) findArgument(findFieldAnnotation(type, attribute, ApiModelProperty.class), "dataType")).getValue());
         }
     }
 
@@ -98,14 +89,10 @@ public class SwaggerPluginTest {
         TypeDeclaration<?> requiredType = runDriverAndParseClass("RequiredClass");
         Class<ApiModelProperty> annotation = ApiModelProperty.class;
 
-        assertFalse(((BooleanLiteralExpr) findArgument(findFieldAnnotation(requiredType, "optionalAttr", annotation),
-                "required")).getValue());
-        assertTrue(((BooleanLiteralExpr) findArgument(findFieldAnnotation(requiredType, "requiredAttr", annotation),
-                "required")).getValue());
-        assertFalse(((BooleanLiteralExpr) findArgument(findFieldAnnotation(requiredType, "optionalListAttr", annotation),
-                "required")).getValue());
-        assertTrue(((BooleanLiteralExpr) findArgument(findFieldAnnotation(requiredType, "requiredListAttr", annotation),
-                "required")).getValue());
+        assertFalse(((BooleanLiteralExpr) findArgument(findFieldAnnotation(requiredType, "optionalAttr", annotation), "required")).getValue());
+        assertTrue(((BooleanLiteralExpr) findArgument(findFieldAnnotation(requiredType, "requiredAttr", annotation), "required")).getValue());
+        assertFalse(((BooleanLiteralExpr) findArgument(findFieldAnnotation(requiredType, "optionalListAttr", annotation), "required")).getValue());
+        assertTrue(((BooleanLiteralExpr) findArgument(findFieldAnnotation(requiredType, "requiredListAttr", annotation), "required")).getValue());
     }
 
 }

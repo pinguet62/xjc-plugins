@@ -16,23 +16,20 @@ public class JavadocPluginTest {
     @Test
     public void test_class_class() {
         assertTrue(formatComments(runDriverAndParseClass("UncommentedClass").getComment().get()).isEmpty());
-        assertEquals("Comment of xs:element CommentedClass",
-                formatComments(runDriverAndParseClass("CommentedClass").getComment().get()).get(0));
+        assertEquals("Comment of xs:element CommentedClass", formatComments(runDriverAndParseClass("CommentedClass").getComment().get()).get(0));
     }
 
     @Test
     public void test_class_field() {
         TypeDeclaration<?> type = runDriverAndParseClass("FieldClass");
         assertTrue(formatComments(findFieldComment(type, "uncommentedAttr")).isEmpty());
-        assertEquals("Comment of xs:element commentedAttr",
-                formatComments(findFieldComment(type, "commentedAttr")).get(0));
+        assertEquals("Comment of xs:element commentedAttr", formatComments(findFieldComment(type, "commentedAttr")).get(0));
     }
 
     @Test
     public void test_enum_class() {
         assertTrue(formatComments(runDriverAndParseClass("UncommentedEnum").getComment().get()).isEmpty());
-        assertEquals("Comment of xs:simpleType CommentedEnum",
-                formatComments(runDriverAndParseClass("CommentedEnum").getComment().get()).get(0));
+        assertEquals("Comment of xs:simpleType CommentedEnum", formatComments(runDriverAndParseClass("CommentedEnum").getComment().get()).get(0));
     }
 
     @Test

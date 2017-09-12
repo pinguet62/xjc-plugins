@@ -4,7 +4,8 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.io.FileUtils.deleteDirectory;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.UncheckedIOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +32,10 @@ public class ListtosetPluginTestRunner {
 
         // Parse generated file
         try {
-            CompilationUnit compilationUnit = JavaParser
-                    .parse(Paths.get("target/fr/pinguet62/" + className + ".java").toFile());
+            CompilationUnit compilationUnit = JavaParser.parse(Paths.get("target/fr/pinguet62/" + className + ".java").toFile());
             return compilationUnit.getTypes().get(0);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new UncheckedIOException(e);
         }
     }
 
