@@ -1,7 +1,9 @@
 package fr.pinguet62.xjc.javadoc;
 
-import static java.util.Arrays.asList;
-import static org.apache.commons.io.FileUtils.deleteDirectory;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.TypeDeclaration;
+import com.sun.tools.xjc.Driver;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,10 +12,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.body.TypeDeclaration;
-import com.sun.tools.xjc.Driver;
+import static java.util.Arrays.asList;
+import static org.apache.commons.io.FileUtils.deleteDirectory;
 
 public class JavadocPluginTestRunner {
 
@@ -32,7 +32,7 @@ public class JavadocPluginTestRunner {
 
         // Parse generated file
         try {
-            CompilationUnit compilationUnit = JavaParser.parse(Paths.get("target/fr/pinguet62/" + className + ".java").toFile());
+            CompilationUnit compilationUnit = StaticJavaParser.parse(Paths.get("target/fr/pinguet62/" + className + ".java").toFile());
             return compilationUnit.getTypes().get(0);
         } catch (FileNotFoundException e) {
             throw new UncheckedIOException(e);
