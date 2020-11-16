@@ -25,9 +25,9 @@ public class StrategyTest {
         List<String> comments = formatComments(type.getComment().get());
         assertEquals("Comment of xs:element CommentedClass", comments.get(0));
         assertEquals("", comments.get(1));
-        assertTrue(comments.get(2).matches("<p>.*CommentedClass.*"));
+        assertTrue(comments.get(2).matches("&lt;p&gt;.*CommentedClass.*"));
         assertEquals("", comments.get(3));
-        assertTrue(comments.get(4).matches("<p>.*"));
+        assertTrue(comments.get(4).matches("&lt;p&gt;.*"));
     }
 
     @Test

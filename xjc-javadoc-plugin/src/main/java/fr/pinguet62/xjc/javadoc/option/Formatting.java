@@ -12,8 +12,6 @@ public class Formatting {
             // indentation
             new Replacement("^( |\t)+", ""), new Replacement("\n( |\t)+", "\n"),
             // empty lines: first & last
-            new Replacement("^\r?\n+", ""), new Replacement("\r?\n+$", ""),
-            // HTML
-            new Replacement("\n", "<br>\n"));
+            new Replacement("^\r?\n+", ""), new Replacement("\r?\n+$", ""));
 
 }

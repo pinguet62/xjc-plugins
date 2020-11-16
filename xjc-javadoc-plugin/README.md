@@ -41,7 +41,7 @@ Generated JAXB classes:
 public class SampleModel {
 
     /**
-     * This is the best<br>
+     * This is the best
      * comment of the world!
      * 
      */
@@ -49,7 +49,7 @@ public class SampleModel {
     protected String attr;
 
     /**
-     * This is the best<br>
+     * This is the best
      * comment of the world!
      * 
      * @return
@@ -62,7 +62,7 @@ public class SampleModel {
     }
 
     /**
-     * This is the best<br>
+     * This is the best
      * comment of the world!
      * 
      * @param value
@@ -128,8 +128,7 @@ You can use *regex* replacement to customize generated javadoc:
 
 *Default:*
 * remove indentation;
-* remove first+last empty lines;
-* add `<br>` end line.
+* remove first+last empty lines.
 
 #### Strategy
 

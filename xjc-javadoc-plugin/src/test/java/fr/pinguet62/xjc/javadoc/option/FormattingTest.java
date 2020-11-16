@@ -36,12 +36,12 @@ public class FormattingTest {
     public void test_default() {
         TypeDeclaration<?> type = runDriverAndParseClass("FormattingClass");
         List<String> lines = asList(type.getComment().get().getContent().split("\r?\n"));
-        assertEquals(" *  3: a b c d e f g h i j k l m n o p q r s t u v w x y z<br>", lines.get(1));
-        assertEquals(" *  4: a b c d e f g h i j k l m n o p q r s t u v w x y z<br>", lines.get(2));
-        assertEquals(" * <br>", lines.get(3));
-        assertEquals(" *  6: a b c d e f g h i j k l m n o p q r s t u v w x y z<br>", lines.get(4));
-        assertEquals(" * <br>", lines.get(5));
-        assertEquals(" * <br>", lines.get(6));
+        assertEquals(" *  3: a b c d e f g h i j k l m n o p q r s t u v w x y z", lines.get(1));
+        assertEquals(" *  4: a b c d e f g h i j k l m n o p q r s t u v w x y z", lines.get(2));
+        assertEquals(" * ", lines.get(3));
+        assertEquals(" *  6: a b c d e f g h i j k l m n o p q r s t u v w x y z", lines.get(4));
+        assertEquals(" * ", lines.get(5));
+        assertEquals(" * ", lines.get(6));
         assertEquals(" *  9: a b c d e f g h i j k l m n o p q r s t u v w x y z", lines.get(7));
     }
 

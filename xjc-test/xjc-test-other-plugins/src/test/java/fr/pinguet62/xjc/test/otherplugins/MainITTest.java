@@ -5,13 +5,10 @@ import static org.junit.Assert.assertNotNull;
 import java.lang.reflect.Field;
 import java.util.Set;
 
-import javax.jws.WebService;
-
 import org.junit.Test;
 
 import fr.pinguet62.Sample;
 
-@WebService
 public class MainITTest {
 
     @Test

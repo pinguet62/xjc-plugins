@@ -20,9 +20,6 @@ public enum DocumentationFormatterStrategy {
             // first & last empty lines
             documentation = documentation.replaceFirst("^\n+", "").replaceFirst("\n+$", "");
 
-            // HTML
-            documentation = documentation.replaceAll("\n", "<br>\n");
-
             return documentation;
         }
     };
