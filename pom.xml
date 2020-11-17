@@ -4,7 +4,7 @@
 
 	<groupId>fr.pinguet62.xjc</groupId>
 	<artifactId>xjc-plugins</artifactId>
-	<version>3.0</version>
+	<version>3.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>XJC plugins</name>
@@ -136,7 +136,7 @@
 		<url>https://github.com/pinguet62/${project.artifactId}</url>
 		<connection>scm:git:git@github.com:pinguet62/${project.artifactId}.git</connection>
 		<developerConnection>scm:git:git@github.com:pinguet62/${project.artifactId}.git</developerConnection>
-	  <tag>xjc-plugins-3.0</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<distributionManagement>
