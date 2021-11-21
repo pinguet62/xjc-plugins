@@ -2,7 +2,7 @@ package fr.pinguet62.xjc.common;
 
 import java.io.StringWriter;
 
-import javax.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElement;
 
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JAnnotationValue;

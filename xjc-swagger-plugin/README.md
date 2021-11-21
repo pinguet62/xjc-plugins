@@ -60,8 +60,8 @@ public class SampleModel {
     <build>
         <plugins>
             <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
+				<groupId>com.evolvedbinary.maven.jvnet</groupId>
+				<artifactId>jaxb30-maven-plugin</artifactId>
                 <!-- ... -->
                 <configuration>
                     <!-- ... -->

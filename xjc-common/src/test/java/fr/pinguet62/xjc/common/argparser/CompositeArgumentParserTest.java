@@ -1,8 +1,8 @@
 package fr.pinguet62.xjc.common.argparser;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /** @see CompositeArgumentParser */
 public class CompositeArgumentParserTest {

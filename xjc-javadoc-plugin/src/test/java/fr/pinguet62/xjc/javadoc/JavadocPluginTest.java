@@ -3,44 +3,43 @@ package fr.pinguet62.xjc.javadoc;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findFieldComment;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.formatComments;
 import static fr.pinguet62.xjc.javadoc.JavadocPluginTestRunner.runDriverAndParseClass;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
+import org.junit.jupiter.api.Test;
 
-public class JavadocPluginTest {
+class JavadocPluginTest {
 
     @Test
-    public void test_class_class() {
+    void test_class_class() {
         assertTrue(formatComments(runDriverAndParseClass("UncommentedClass").getComment().get()).isEmpty());
         assertEquals("Comment of xs:element CommentedClass", formatComments(runDriverAndParseClass("CommentedClass").getComment().get()).get(0));
     }
 
     @Test
-    public void test_class_field() {
+    void test_class_field() {
         TypeDeclaration<?> type = runDriverAndParseClass("FieldClass");
         assertTrue(formatComments(findFieldComment(type, "uncommentedAttr")).isEmpty());
         assertEquals("Comment of xs:element commentedAttr", formatComments(findFieldComment(type, "commentedAttr")).get(0));
     }
 
     @Test
-    public void test_enum_class() {
+    void test_enum_class() {
         assertTrue(formatComments(runDriverAndParseClass("UncommentedEnum").getComment().get()).isEmpty());
         assertEquals("Comment of xs:simpleType CommentedEnum", formatComments(runDriverAndParseClass("CommentedEnum").getComment().get()).get(0));
     }
 
     @Test
-    public void test_enum_entry() {
+    void test_enum_entry() {
         EnumDeclaration type = (EnumDeclaration) runDriverAndParseClass("EntryEnum");
         assertTrue(formatComments(findFieldComment(type, "UNCOMMENTED_VALUE")).isEmpty());
         assertEquals("Comment of xs:enumeration", formatComments(findFieldComment(type, "COMMENTED_VALUE")).get(0));
     }
 
     @Test
-    public void test_group_field() {
+    void test_group_field() {
         TypeDeclaration<?> type = runDriverAndParseClass("SampleGroupClass");
         assertEquals("Comment of xs:group GroupClass.attr", formatComments(findFieldComment(type, "attr")).get(0));
     }

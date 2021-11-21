@@ -3,17 +3,16 @@ package fr.pinguet62.xjc.listtoset;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findField;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findMethod;
 import static fr.pinguet62.xjc.listtoset.ListtosetPluginTestRunner.generateAndParse;
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.github.javaparser.ast.body.TypeDeclaration;
+import org.junit.jupiter.api.Test;
 
-public class ListtosetPluginTest {
+class ListtosetPluginTest {
 
     /** Properties declared into {@code binding.jxb} file. */
     @Test
-    public void test_default() throws Exception {
+    void test_default() throws Exception {
         String[] args = new String[] { "-extension", "-b", "src/test/resources/binding.xjb" };
 
         TypeDeclaration<?> modelType = generateAndParse("Model", args);
@@ -31,7 +30,7 @@ public class ListtosetPluginTest {
 
     /** Process all properties. */
     @Test
-    public void test_processAll() throws Exception {
+    void test_processAll() throws Exception {
         String[] args = new String[] { "-Xlisttoset-processAll" };
 
         TypeDeclaration<?> modelType = generateAndParse("Model", args);

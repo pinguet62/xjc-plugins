@@ -1,18 +1,17 @@
 package fr.pinguet62.xjc.test.otherplugins;
 
-import static org.junit.Assert.assertNotNull;
+import fr.pinguet62.Sample;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.util.Set;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import fr.pinguet62.Sample;
-
-public class MainITTest {
+class MainITTest {
 
     @Test
-    public void test() throws NoSuchFieldException, SecurityException {
+    void test() throws NoSuchFieldException, SecurityException {
         // before
         Exception inheritance = new Sample(); // tested by compiler
         assertNotNull(inheritance);

@@ -1,18 +1,17 @@
 package fr.pinguet62.xjc.common.argparser;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 import fr.pinguet62.xjc.common.argparser.RegexArgumentParser.Replacement;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /** @see RegexArgumentParser */
-public class RegexParserTest {
+class RegexParserTest {
 
-    private static final String PREFIX = "-Xfoo";
+    static final String PREFIX = "-Xfoo";
 
     @Test
-    public void test_parse() {
+    void test_parse() {
         String[] args = { "*", "*", PREFIX + "-regex-replace=foo", PREFIX + "-regex-by=bar", PREFIX + "-regex-replace=first",
                 PREFIX + "-regex-by=second", "*" };
         RegexArgumentParser parser = new RegexArgumentParser(PREFIX);
@@ -25,7 +24,7 @@ public class RegexParserTest {
     }
 
     @Test
-    public void test_transform() {
+    void test_transform() {
         RegexArgumentParser parser = new RegexArgumentParser(PREFIX);
         parser.getReplacements().clear();
         parser.getReplacements().add(new Replacement("\r?\n", "<br>"));

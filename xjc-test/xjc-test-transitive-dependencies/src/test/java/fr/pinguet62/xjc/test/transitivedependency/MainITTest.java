@@ -1,15 +1,14 @@
 package fr.pinguet62.xjc.test.transitivedependency;
 
-import static org.junit.Assert.assertNotNull;
-
-import org.junit.Test;
-
 import fr.pinguet62.CommentClass; // tested by compiler
+import org.junit.jupiter.api.Test;
 
-public class MainITTest {
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+class MainITTest {
 
     @Test
-    public void test() {
+    void test() {
         assertNotNull(CommentClass.class);
     }
 
