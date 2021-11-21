@@ -1,10 +1,10 @@
 package fr.pinguet62.xjc.swagger.option;
 
-import static java.util.Arrays.asList;
+import fr.pinguet62.xjc.common.argparser.RegexArgumentParser.Replacement;
 
 import java.util.List;
 
-import fr.pinguet62.xjc.common.argparser.RegexArgumentParser.Replacement;
+import static java.util.Arrays.asList;
 
 public class DescriptionFormatting {
 

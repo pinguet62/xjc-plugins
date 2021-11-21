@@ -1,25 +1,6 @@
 package fr.pinguet62.xjc.listtoset;
 
-import static com.sun.codemodel.JMod.PUBLIC;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.xml.namespace.QName;
-
-import org.w3c.dom.Element;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
-
-import com.sun.codemodel.JBlock;
-import com.sun.codemodel.JClass;
-import com.sun.codemodel.JDocComment;
-import com.sun.codemodel.JExpr;
-import com.sun.codemodel.JFieldVar;
-import com.sun.codemodel.JMethod;
+import com.sun.codemodel.*;
 import com.sun.tools.xjc.BadCommandLineException;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
@@ -27,11 +8,22 @@ import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
-
 import fr.pinguet62.xjc.common.Utils;
 import fr.pinguet62.xjc.common.argparser.ArgumentParser;
 import fr.pinguet62.xjc.common.argparser.BooleanArgumentParser;
 import fr.pinguet62.xjc.common.argparser.CompositeArgumentParser;
+import org.w3c.dom.Element;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+
+import javax.xml.namespace.QName;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import static com.sun.codemodel.JMod.PUBLIC;
 
 public class ListtosetPlugin extends Plugin {
 

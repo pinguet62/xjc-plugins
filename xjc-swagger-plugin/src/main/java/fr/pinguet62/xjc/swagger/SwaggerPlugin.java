@@ -1,25 +1,12 @@
 package fr.pinguet62.xjc.swagger;
 
-import static fr.pinguet62.xjc.swagger.option.DataTypeStrategy.FULL_NAME;
-import static fr.pinguet62.xjc.swagger.option.DescriptionFormatting.DEFAULT;
-
-import java.io.IOException;
-
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
-
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JFieldVar;
 import com.sun.tools.xjc.BadCommandLineException;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
-import com.sun.tools.xjc.outline.ClassOutline;
-import com.sun.tools.xjc.outline.EnumConstantOutline;
-import com.sun.tools.xjc.outline.EnumOutline;
-import com.sun.tools.xjc.outline.FieldOutline;
-import com.sun.tools.xjc.outline.Outline;
+import com.sun.tools.xjc.outline.*;
 import com.sun.xml.xsom.XSComponent;
-
 import fr.pinguet62.xjc.common.Utils;
 import fr.pinguet62.xjc.common.argparser.ArgumentParser;
 import fr.pinguet62.xjc.common.argparser.CompositeArgumentParser;
@@ -28,6 +15,13 @@ import fr.pinguet62.xjc.common.argparser.RegexArgumentParser;
 import fr.pinguet62.xjc.swagger.option.DataTypeStrategy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+
+import static fr.pinguet62.xjc.swagger.option.DataTypeStrategy.FULL_NAME;
+import static fr.pinguet62.xjc.swagger.option.DescriptionFormatting.DEFAULT;
 
 public class SwaggerPlugin extends Plugin {
 

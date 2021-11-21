@@ -5,6 +5,7 @@ XJC plugin to change **property type** to `java.util.Set` (from `java.util.List`
 ## Sample
 
 Input XSD:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fr/pinguet62">
@@ -17,6 +18,7 @@ Input XSD:
 ```
 
 Generated JAXB class:
+
 ```java
 // [...]
 
@@ -40,6 +42,7 @@ public class SampleModel {
 ## Usage
 
 Optional `binding.xjb`:
+
 ```xml
 <jxb:bindings ... xmlns:p62="http://pinguet62.fr" jxb:extensionBindingPrefixes="p62">
 	<jxb:bindings schemaLocation="./test.xsd">
@@ -84,6 +87,7 @@ Optional `binding.xjb`:
 #### Process all
 
 To process all properties:
+
 ```xml
 <args>
 	<arg>-Xlisttoset</arg>

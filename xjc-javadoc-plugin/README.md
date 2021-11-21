@@ -5,6 +5,7 @@ XJC plugin to add **Javadoc** to generated JAXB classes (from `<xs:documentation
 ## Sample
 
 Input XSD:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fr/pinguet62">
@@ -27,6 +28,7 @@ Input XSD:
 ```
 
 Generated JAXB classes:
+
 ```java
 // [...]
 
@@ -114,6 +116,7 @@ public class SampleModel {
 #### Formatting
 
 You can use *regex* replacement to customize generated javadoc:
+
 ```xml
 <args>
 	<arg>-Xjavadoc</arg>
@@ -127,6 +130,7 @@ You can use *regex* replacement to customize generated javadoc:
 ```
 
 *Default:*
+
 * remove indentation;
 * remove first+last empty lines.
 
@@ -138,7 +142,9 @@ You can use *regex* replacement to customize generated javadoc:
 		<arg>-Xjavadoc-strategy=...</arg>
 </args>
 ```
+
 where `...` can be:
+
 * `APPEND_BEGIN`;
 * `REPLACE`.
 

@@ -71,8 +71,7 @@ public class RegexArgumentParser implements ArgumentParser {
     }
 
     /**
-     * @param input
-     *            The {@link String} to process.
+     * @param input The {@link String} to process.
      * @return The processed {@link String}.
      * @see String#replaceAll(String, String)
      */

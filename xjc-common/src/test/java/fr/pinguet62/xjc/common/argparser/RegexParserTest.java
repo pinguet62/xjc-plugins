@@ -5,15 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/** @see RegexArgumentParser */
 class RegexParserTest {
 
     static final String PREFIX = "-Xfoo";
 
     @Test
     void test_parse() {
-        String[] args = { "*", "*", PREFIX + "-regex-replace=foo", PREFIX + "-regex-by=bar", PREFIX + "-regex-replace=first",
-                PREFIX + "-regex-by=second", "*" };
+        String[] args = {"*", "*", PREFIX + "-regex-replace=foo", PREFIX + "-regex-by=bar", PREFIX + "-regex-replace=first",
+                PREFIX + "-regex-by=second", "*"};
         RegexArgumentParser parser = new RegexArgumentParser(PREFIX);
         int consumed = parser.parse(args, 2);
         assertEquals(4, consumed);
@@ -31,5 +30,4 @@ class RegexParserTest {
         parser.getReplacements().add(new Replacement("\\* ", "<li>"));
         assertEquals("<li>entry1<br><li>entry2", parser.transform("* entry1\r\n* entry2"));
     }
-
 }

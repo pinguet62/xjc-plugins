@@ -1,14 +1,14 @@
 package fr.pinguet62.xjc.javadoc;
 
+import com.github.javaparser.ast.body.EnumDeclaration;
+import com.github.javaparser.ast.body.TypeDeclaration;
+import org.junit.jupiter.api.Test;
+
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findFieldComment;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.formatComments;
 import static fr.pinguet62.xjc.javadoc.JavadocPluginTestRunner.runDriverAndParseClass;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import com.github.javaparser.ast.body.EnumDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
-import org.junit.jupiter.api.Test;
 
 class JavadocPluginTest {
 

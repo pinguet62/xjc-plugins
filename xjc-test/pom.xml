@@ -1,51 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>fr.pinguet62.xjc</groupId>
-		<artifactId>xjc-plugins</artifactId>
-		<version>3.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>fr.pinguet62.xjc</groupId>
+        <artifactId>xjc-plugins</artifactId>
+        <version>3.1-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>xjc-test</artifactId>
-	<packaging>pom</packaging>
+    <artifactId>xjc-test</artifactId>
+    <packaging>pom</packaging>
 
-	<name>Integration testing</name>
+    <name>Integration testing</name>
 
-	<modules>
-		<module>xjc-test-other-plugins</module>
-		<module>xjc-test-transitive-dependencies</module>
-	</modules>
+    <modules>
+        <module>xjc-test-other-plugins</module>
+        <module>xjc-test-transitive-dependencies</module>
+    </modules>
 
-	<properties>
-		<maven.deploy.skip>true</maven.deploy.skip>
-	</properties>
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>jakarta.xml.bind</groupId>
-			<artifactId>jakarta.xml.bind-api</artifactId>
-			<version>3.0.1</version>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>3.0.1</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>5.8.1</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>com.evolvedbinary.maven.jvnet</groupId>
-					<artifactId>jaxb30-maven-plugin</artifactId>
-					<version>0.15.0</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.evolvedbinary.maven.jvnet</groupId>
+                    <artifactId>jaxb30-maven-plugin</artifactId>
+                    <version>0.15.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

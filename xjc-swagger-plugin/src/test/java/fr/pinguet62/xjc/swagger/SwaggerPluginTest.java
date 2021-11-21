@@ -1,5 +1,18 @@
 package fr.pinguet62.xjc.swagger;
 
+import com.github.javaparser.ast.body.EnumDeclaration;
+import com.github.javaparser.ast.body.TypeDeclaration;
+import com.github.javaparser.ast.expr.BooleanLiteralExpr;
+import com.github.javaparser.ast.expr.StringLiteralExpr;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import org.junit.jupiter.api.Test;
+
+import javax.xml.datatype.Duration;
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findAnnotation;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findArgument;
 import static fr.pinguet62.xjc.common.test.JavaParserUtils.findEntry;
@@ -9,21 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
-import javax.xml.datatype.Duration;
-import javax.xml.datatype.XMLGregorianCalendar;
-
-import com.github.javaparser.ast.body.EnumDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
-import com.github.javaparser.ast.expr.BooleanLiteralExpr;
-import com.github.javaparser.ast.expr.StringLiteralExpr;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import org.junit.jupiter.api.Test;
 
 class SwaggerPluginTest {
 
@@ -50,7 +48,9 @@ class SwaggerPluginTest {
         assertNull(findArgument(findAnnotation(findEntry((EnumDeclaration) enumType, "UNCOMMENTED_VALUE"), ApiModelProperty.class), "value"));
     }
 
-    /** @see ApiModelProperty#dataType() */
+    /**
+     * @see ApiModelProperty#dataType()
+     */
     @Test
     void test_dataType() {
         TypeDeclaration<?> type = runDriverAndParseClass("AllTypesClass");
@@ -82,7 +82,9 @@ class SwaggerPluginTest {
         }
     }
 
-    /** @see ApiModelProperty#required() */
+    /**
+     * @see ApiModelProperty#required()
+     */
     @Test
     void test_required() {
         TypeDeclaration<?> requiredType = runDriverAndParseClass("RequiredClass");

@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/** @see CompositeArgumentParser */
+/**
+ * @see CompositeArgumentParser
+ */
 public class CompositeArgumentParserTest {
 
     /**
@@ -19,7 +21,7 @@ public class CompositeArgumentParserTest {
      */
     @Test
     public void test() {
-        String[] args = { "X-0", "X-1", "X-2", "X-3", "X-4", "X-5", "X-6", "X-7", "X-8", "X-9" };
+        String[] args = {"X-0", "X-1", "X-2", "X-3", "X-4", "X-5", "X-6", "X-7", "X-8", "X-9"};
 
         ArgumentParser ignored = new ArgumentParser() {
             @Override
@@ -64,7 +66,7 @@ public class CompositeArgumentParserTest {
     public void test_argumentAndPrefix() {
         CompositeArgumentParser parser = new CompositeArgumentParser("Xxxx", new BooleanArgumentParser("aaa"),
                 new BooleanArgumentParser("bbb"));
-        int consumed = parser.parse(new String[] { "Xxxx-aaa", "Xxxx-bbb" }, 0);
+        int consumed = parser.parse(new String[]{"Xxxx-aaa", "Xxxx-bbb"}, 0);
         assertEquals(2, consumed);
     }
 
@@ -72,8 +74,7 @@ public class CompositeArgumentParserTest {
     public void test_ignoreFirst() {
         CompositeArgumentParser parser = new CompositeArgumentParser("Xxxx", new BooleanArgumentParser("aaa"),
                 new BooleanArgumentParser("bbb")).ignoringFirst();
-        int consumed = parser.parse(new String[] { "Xxxx", "Xxxx-aaa", "Xxxx-bbb" }, 0);
+        int consumed = parser.parse(new String[]{"Xxxx", "Xxxx-aaa", "Xxxx-bbb"}, 0);
         assertEquals(3, consumed);
     }
-
 }

@@ -1,14 +1,6 @@
 package fr.pinguet62.xjc.common;
 
-import java.io.StringWriter;
-
-import jakarta.xml.bind.annotation.XmlElement;
-
-import com.sun.codemodel.JAnnotationUse;
-import com.sun.codemodel.JAnnotationValue;
-import com.sun.codemodel.JFieldVar;
-import com.sun.codemodel.JFormatter;
-import com.sun.codemodel.JMethod;
+import com.sun.codemodel.*;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.reader.xmlschema.bindinfo.BindInfo;
 import com.sun.xml.xsom.XSAnnotation;
@@ -16,17 +8,21 @@ import com.sun.xml.xsom.XSAttributeUse;
 import com.sun.xml.xsom.XSComponent;
 import com.sun.xml.xsom.XSParticle;
 import com.sun.xml.xsom.impl.RestrictionSimpleTypeImpl;
+import jakarta.xml.bind.annotation.XmlElement;
 
-/** Utility methods for  */
+import java.io.StringWriter;
+
+/**
+ * Utility methods for
+ */
 public class Utils {
 
     /**
      * <u>Warning:</u> If several?
      *
-     * @param schemaComponent
-     *            The top level tag.
+     * @param schemaComponent The top level tag.
      * @return The found {@link JAnnotationUse}<br>
-     *         {@code null} if not present.
+     * {@code null} if not present.
      */
     private static JAnnotationUse getAnnotation(JFieldVar fieldVar, Class<?> annotation) {
         for (JAnnotationUse ann : fieldVar.annotations())
@@ -48,10 +44,9 @@ public class Utils {
     /**
      * Extract the XSD documentation.
      *
-     * @param schemaComponent
-     *            The top level tag.
+     * @param schemaComponent The top level tag.
      * @return The content of XSD tag.<br>
-     *         {@code null} if tag is absent.
+     * {@code null} if tag is absent.
      */
     public static String getDocumentation(XSComponent schemaComponent) {
         XSAnnotation xsAnnotation = schemaComponent.getAnnotation();
@@ -74,8 +69,7 @@ public class Utils {
     /**
      * Parse {@link XmlElement} annotation and get {@link XmlElement#required()} attribute.
      *
-     * @param field
-     *            The field to analyze.
+     * @param field The field to analyze.
      * @return If the field is required.
      * @see XmlElement#required()
      */

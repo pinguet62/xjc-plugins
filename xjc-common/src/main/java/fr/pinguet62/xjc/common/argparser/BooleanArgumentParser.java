@@ -1,6 +1,8 @@
 package fr.pinguet62.xjc.common.argparser;
 
-/** {@link ArgumentParser} to check if argument is present. */
+/**
+ * {@link ArgumentParser} to check if argument is present.
+ */
 public class BooleanArgumentParser implements ArgumentParser {
 
     private final String argumentName;

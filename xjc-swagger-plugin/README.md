@@ -4,17 +4,18 @@ XJC plugin to add Swagger annotation to generate JAXB classes.
 
 ## Support
 
-* **Comments:** use XSD `<xs:annotation><xs:documentation>` value  
-	* class: `@ApiModel(value = "Class comment...")`  
-	* property: `@ApiModelProperty(value = "Attribute comment...")`
+* **Comments:** use XSD `<xs:annotation><xs:documentation>` value
+    * class: `@ApiModel(value = "Class comment...")`
+    * property: `@ApiModelProperty(value = "Attribute comment...")`
 * **Required constraint:** if `minOccurs="1"` attribute on XSD  
-	`@ApiModelProperty(required = true)`
+  `@ApiModelProperty(required = true)`
 * **Data type:** full qualified name (to fix naming collision od Swagger)  
-	`@ApiModelProperty(dataType = "java.util.List<java.lang.String>")`
+  `@ApiModelProperty(dataType = "java.util.List<java.lang.String>")`
 
 ## Sample
 
 Input XSD:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fr/pinguet62">
@@ -34,6 +35,7 @@ Input XSD:
 ```
 
 Generated JAXB class:
+
 ```java
 // [...]
 
@@ -93,7 +95,9 @@ public class SampleModel {
 		<arg>-Xswagger-dataTypeStrategy=...</arg>
 </args>
 ```
+
 where `...` can be:
+
 * `FULL_NAME`: for *fully qualified* class name;
 * `SIMPLE_NAME`: default Swagger strategy.
 

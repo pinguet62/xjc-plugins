@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fr/pinguet62" xmlns:model="http://fr/pinguet62">
 
-	<!-- Comments: @ApiModel(description) & @ApiModelProperty(value) -->
-	<xs:complexType name="CommentClass">
-		<xs:annotation>
-			<xs:documentation>Comment of xs:element CommentType</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="uncommentedAttr" type="xs:string" />
-			<xs:element name="commentedAttr" type="xs:string">
-				<xs:annotation>
-					<xs:documentation>Comment of xs:element attr</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:simpleType name="EnumCommentClass">
-		<xs:annotation>
-			<xs:documentation>Comment of xs:simpleType EnumCommentClass</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="COMMENTED_VALUE">
-				<xs:annotation>
-					<xs:documentation>Comment of xs:enumeration</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="UNCOMMENTED_VALUE" />
-		</xs:restriction>
-	</xs:simpleType>
+    <!-- Comments: @ApiModel(description) & @ApiModelProperty(value) -->
+    <xs:complexType name="CommentClass">
+        <xs:annotation>
+            <xs:documentation>Comment of xs:element CommentType</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="uncommentedAttr" type="xs:string"/>
+            <xs:element name="commentedAttr" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Comment of xs:element attr</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="EnumCommentClass">
+        <xs:annotation>
+            <xs:documentation>Comment of xs:simpleType EnumCommentClass</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="COMMENTED_VALUE">
+                <xs:annotation>
+                    <xs:documentation>Comment of xs:enumeration</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="UNCOMMENTED_VALUE"/>
+        </xs:restriction>
+    </xs:simpleType>
 
-	<!-- @ApiModelProperty(required) -->
-	<xs:complexType name="RequiredClass">
-		<xs:sequence>
-			<xs:element name="optionalAttr" type="xs:string" minOccurs="0" maxOccurs="1" />
-			<xs:element name="requiredAttr" type="xs:string" minOccurs="1" maxOccurs="1" />
-			<xs:element name="optionalListAttr" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
-			<xs:element name="requiredListAttr" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
-		</xs:sequence>
-	</xs:complexType>
+    <!-- @ApiModelProperty(required) -->
+    <xs:complexType name="RequiredClass">
+        <xs:sequence>
+            <xs:element name="optionalAttr" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="requiredAttr" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="optionalListAttr" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="requiredListAttr" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
 
-	<!-- @ApiModelProperty(dataType) -->
-	<xs:complexType name="AllTypesClass">
-		<xs:sequence>
-			<xs:element name="booleanAttr" type="xs:boolean" />
-			<xs:element name="byteAttr" type="xs:byte" />
-			<xs:element name="dateAttr" type="xs:date" />
-			<xs:element name="dateTimeAttr" type="xs:dateTime" />
-			<xs:element name="decimalAttr" type="xs:decimal" />
-			<xs:element name="doubleAttr" type="xs:double" />
-			<xs:element name="durationAttr" type="xs:duration" />
-			<xs:element name="intAttr" type="xs:int" />
-			<xs:element name="integerAttr" type="xs:integer" />
-			<xs:element name="longAttr" type="xs:long" />
-			<xs:element name="shortAttr" type="xs:short" />
-			<xs:element name="stringAttr" type="xs:string" />
-			<xs:element name="timeAttr" type="xs:time" />
-			<xs:element name="complexAttr" type="model:CommentClass" />
-			<xs:element name="enumAttr" type="model:EnumCommentClass" />
-		</xs:sequence>
-	</xs:complexType>
+    <!-- @ApiModelProperty(dataType) -->
+    <xs:complexType name="AllTypesClass">
+        <xs:sequence>
+            <xs:element name="booleanAttr" type="xs:boolean"/>
+            <xs:element name="byteAttr" type="xs:byte"/>
+            <xs:element name="dateAttr" type="xs:date"/>
+            <xs:element name="dateTimeAttr" type="xs:dateTime"/>
+            <xs:element name="decimalAttr" type="xs:decimal"/>
+            <xs:element name="doubleAttr" type="xs:double"/>
+            <xs:element name="durationAttr" type="xs:duration"/>
+            <xs:element name="intAttr" type="xs:int"/>
+            <xs:element name="integerAttr" type="xs:integer"/>
+            <xs:element name="longAttr" type="xs:long"/>
+            <xs:element name="shortAttr" type="xs:short"/>
+            <xs:element name="stringAttr" type="xs:string"/>
+            <xs:element name="timeAttr" type="xs:time"/>
+            <xs:element name="complexAttr" type="model:CommentClass"/>
+            <xs:element name="enumAttr" type="model:EnumCommentClass"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

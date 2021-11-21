@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>fr.pinguet62.xjc</groupId>
-		<artifactId>xjc-test</artifactId>
-		<version>3.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>fr.pinguet62.xjc</groupId>
+        <artifactId>xjc-test</artifactId>
+        <version>3.1-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>xjc-test-other-plugins</artifactId>
-	<packaging>jar</packaging>
+    <artifactId>xjc-test-other-plugins</artifactId>
 
-	<name>Other dependencies</name>
-	<description>Use other before and after the plugin</description>
+    <name>Other dependencies</name>
+    <description>Use other before and after the plugin</description>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.evolvedbinary.maven.jvnet</groupId>
-				<artifactId>jaxb30-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<args>
-						<arg>-Xinheritance</arg>
-						<arg>-Xlisttoset</arg>
-						<arg>-Xannotate</arg>
-					</args>
-					<plugins>
-						<plugin>
-							<groupId>org.jvnet.jaxb2_commons</groupId>
-							<artifactId>jaxb2-basics</artifactId>
-							<version>1.11.1</version>
-						</plugin>
-						<plugin>
-							<groupId>fr.pinguet62.xjc</groupId>
-							<artifactId>xjc-listtoset-plugin</artifactId>
-							<version>${project.version}</version>
-						</plugin>
-						<plugin>
-							<groupId>org.jvnet.jaxb2_commons</groupId>
-							<artifactId>jaxb2-basics-annotate</artifactId>
-							<version>1.1.0</version>
-						</plugin>
-					</plugins>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.evolvedbinary.maven.jvnet</groupId>
+                <artifactId>jaxb30-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <args>
+                        <arg>-Xinheritance</arg>
+                        <arg>-Xlisttoset</arg>
+                        <arg>-Xannotate</arg>
+                    </args>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics</artifactId>
+                            <version>1.11.1</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>xjc-listtoset-plugin</artifactId>
+                            <version>${project.version}</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics-annotate</artifactId>
+                            <version>1.1.0</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

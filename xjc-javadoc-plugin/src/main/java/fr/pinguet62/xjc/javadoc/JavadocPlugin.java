@@ -1,33 +1,27 @@
 package fr.pinguet62.xjc.javadoc;
 
-import static fr.pinguet62.xjc.common.Utils.getDocumentation;
-import static fr.pinguet62.xjc.common.Utils.getMethod;
-import static fr.pinguet62.xjc.common.Utils.resolveIndirectAccessToField;
-import static fr.pinguet62.xjc.javadoc.option.Formatting.DEFAULT;
-import static fr.pinguet62.xjc.javadoc.option.Strategy.REPLACE;
-
-import java.io.IOException;
-
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
-
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
 import com.sun.tools.xjc.BadCommandLineException;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
-import com.sun.tools.xjc.outline.ClassOutline;
-import com.sun.tools.xjc.outline.EnumConstantOutline;
-import com.sun.tools.xjc.outline.EnumOutline;
-import com.sun.tools.xjc.outline.FieldOutline;
-import com.sun.tools.xjc.outline.Outline;
+import com.sun.tools.xjc.outline.*;
 import com.sun.xml.xsom.XSComponent;
-
 import fr.pinguet62.xjc.common.argparser.ArgumentParser;
 import fr.pinguet62.xjc.common.argparser.CompositeArgumentParser;
 import fr.pinguet62.xjc.common.argparser.EnumArgumentParser;
 import fr.pinguet62.xjc.common.argparser.RegexArgumentParser;
 import fr.pinguet62.xjc.javadoc.option.Strategy;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+
+import static fr.pinguet62.xjc.common.Utils.getDocumentation;
+import static fr.pinguet62.xjc.common.Utils.getMethod;
+import static fr.pinguet62.xjc.common.Utils.resolveIndirectAccessToField;
+import static fr.pinguet62.xjc.javadoc.option.Formatting.DEFAULT;
+import static fr.pinguet62.xjc.javadoc.option.Strategy.REPLACE;
 
 public class JavadocPlugin extends Plugin {
 

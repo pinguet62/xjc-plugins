@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/** @see EnumArgumentParser */
 class EnumParserTest {
 
     static enum Param {
@@ -20,7 +19,7 @@ class EnumParserTest {
     void test_parse() {
         EnumArgumentParser<Param> parser = new EnumArgumentParser<>(PREFIX, Param.class);
 
-        int consumed = parser.parse(new String[] { PREFIX + "FIRST" }, 0);
+        int consumed = parser.parse(new String[]{PREFIX + "FIRST"}, 0);
         assertEquals(1, consumed);
         assertEquals(FIRST, parser.getSelected());
     }
@@ -36,5 +35,4 @@ class EnumParserTest {
         assertThrows(IllegalArgumentException.class, () ->
                 new EnumArgumentParser<>(PREFIX, Param.class).parse(new String[]{PREFIX + "UNKNOWN"}, 0));
     }
-
 }

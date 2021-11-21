@@ -1,7 +1,6 @@
 package fr.pinguet62.xjc.swagger.option;
 
 import com.sun.codemodel.JType;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -22,7 +21,9 @@ public enum DataTypeStrategy {
             return classInfo.fullName();
         }
     },
-    /** @see Class#getSimpleName() */
+    /**
+     * @see Class#getSimpleName()
+     */
     SIMPLE_NAME {
         @Override
         public String getValue(JType classInfo) {

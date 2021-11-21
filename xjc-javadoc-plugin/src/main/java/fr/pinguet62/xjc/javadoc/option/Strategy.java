@@ -22,10 +22,8 @@ public enum Strategy {
     /**
      * Apply the javadoc on {@link JDocComment}.
      *
-     * @param javadoc
-     *            The {@link JDocComment} to modify.
-     * @param documentation
-     *            The javadoc of component (class, field, method, ...).
+     * @param javadoc       The {@link JDocComment} to modify.
+     * @param documentation The javadoc of component (class, field, method, ...).
      */
     public abstract void apply(JDocComment javadoc, String documentation);
 

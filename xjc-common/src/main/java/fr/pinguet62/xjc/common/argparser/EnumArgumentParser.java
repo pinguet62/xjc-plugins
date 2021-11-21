@@ -1,6 +1,8 @@
 package fr.pinguet62.xjc.common.argparser;
 
-/** {@link ArgumentParser} where value is an {@link Enum}. */
+/**
+ * {@link ArgumentParser} where value is an {@link Enum}.
+ */
 public class EnumArgumentParser<T extends Enum<T>> implements ArgumentParser {
 
     private final String argumentName;
@@ -10,11 +12,9 @@ public class EnumArgumentParser<T extends Enum<T>> implements ArgumentParser {
     private T value;
 
     /**
-     * @param argumentName
-     *            The argument name.<br>
-     *            Must end with {@code "="} (example: {@code "-Xfoo="}).
-     * @param type
-     *            The {@link Enum} type.
+     * @param argumentName The argument name.<br>
+     *                     Must end with {@code "="} (example: {@code "-Xfoo="}).
+     * @param type         The {@link Enum} type.
      */
     public EnumArgumentParser(String argumentName, Class<T> type) {
         this.argumentName = argumentName;
@@ -22,13 +22,10 @@ public class EnumArgumentParser<T extends Enum<T>> implements ArgumentParser {
     }
 
     /**
-     * @param argumentName
-     *            The argument name.<br>
-     *            Must end with {@code "="} (example: {@code "-Xfoo="}).
-     * @param type
-     *            The {@link Enum} type.
-     * @param defaultValue
-     *            The value to use if argument is not present.
+     * @param argumentName The argument name.<br>
+     *                     Must end with {@code "="} (example: {@code "-Xfoo="}).
+     * @param type         The {@link Enum} type.
+     * @param defaultValue The value to use if argument is not present.
      */
     public EnumArgumentParser(String argumentName, Class<T> type, T defaultValue) {
         this(argumentName, type);
@@ -40,8 +37,7 @@ public class EnumArgumentParser<T extends Enum<T>> implements ArgumentParser {
     }
 
     /**
-     * @throws IllegalArgumentException
-     *             See {@link Enum#valueOf(Class, String)}
+     * @throws IllegalArgumentException See {@link Enum#valueOf(Class, String)}
      */
     @Override
     public int parse(String[] args, int start) {

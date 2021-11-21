@@ -38,9 +38,8 @@ public enum DocumentationFormatterStrategy {
     public abstract String getMavenOption();
 
     /**
-     * @param documentation
-     *            The XSD documentation.<br>
-     *            Cannot be {@code null}.
+     * @param documentation The XSD documentation.<br>
+     *                      Cannot be {@code null}.
      * @return The formatted documentation.
      */
     public abstract String process(String documentation);

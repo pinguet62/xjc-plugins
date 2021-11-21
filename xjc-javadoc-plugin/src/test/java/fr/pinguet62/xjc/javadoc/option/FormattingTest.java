@@ -1,20 +1,22 @@
 package fr.pinguet62.xjc.javadoc.option;
 
+import com.github.javaparser.ast.body.TypeDeclaration;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static fr.pinguet62.xjc.javadoc.JavadocPluginTestRunner.runDriverAndParseClass;
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-
-import com.github.javaparser.ast.body.TypeDeclaration;
-import org.junit.jupiter.api.Test;
-
-/** @see Formatting */
+/**
+ * @see Formatting
+ */
 class FormattingTest {
 
     @Test
     void test_custom() {
-        String[] args = { "-Xjavadoc-formatting-regex-replace=[a-z3469]", "-Xjavadoc-formatting-regex-by=" };
+        String[] args = {"-Xjavadoc-formatting-regex-replace=[a-z3469]", "-Xjavadoc-formatting-regex-by="};
 
         TypeDeclaration<?> type = runDriverAndParseClass("FormattingClass", args);
         List<String> lines = asList(type.getComment().get().getContent().split("\r?\n"));
@@ -30,7 +32,9 @@ class FormattingTest {
         assertEquals(" * \t\t\t\t:                          ", lines.get(10));
     }
 
-    /** @see Formatting#DEFAULT */
+    /**
+     * @see Formatting#DEFAULT
+     */
     @Test
     void test_default() {
         TypeDeclaration<?> type = runDriverAndParseClass("FormattingClass");

@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>fr.pinguet62.xjc</groupId>
-		<artifactId>xjc-plugins</artifactId>
-		<version>3.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>fr.pinguet62.xjc</groupId>
+        <artifactId>xjc-plugins</artifactId>
+        <version>3.1-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>xjc-swagger-plugin</artifactId>
-	<packaging>jar</packaging>
+    <artifactId>xjc-swagger-plugin</artifactId>
 
-	<name>Swagger XJC plugin</name>
-	<description>XJC plugin to add Swagger annotation to generate JAXB classes</description>
+    <name>Swagger XJC plugin</name>
+    <description>XJC plugin to add Swagger annotation to generate JAXB classes</description>
 
-	<dependencies>
-		<dependency>
-			<groupId>fr.pinguet62.xjc</groupId>
-			<artifactId>xjc-common</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>fr.pinguet62.xjc</groupId>
-			<artifactId>xjc-common-test</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>xjc-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.pinguet62.xjc</groupId>
+            <artifactId>xjc-common-test</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-annotations</artifactId>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
+    </dependencies>
 </project>

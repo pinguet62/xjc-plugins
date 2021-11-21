@@ -1,10 +1,10 @@
 package fr.pinguet62.xjc.common.argparser;
 
-import static java.util.Arrays.asList;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 /**
  * <ul>
@@ -22,12 +22,9 @@ public class CompositeArgumentParser implements ArgumentParser {
     private final List<ArgumentParser> parsers;
 
     /**
-     *
-     * @param argumentName
-     *            The base argument name.
-     * @param parsers
-     *            The other {@link ArgumentParser}.<br>
-     *            Their name {@code argumentName} is added to this {@code argumentName}.
+     * @param argumentName The base argument name.
+     * @param parsers      The other {@link ArgumentParser}.<br>
+     *                     Their name {@code argumentName} is added to this {@code argumentName}.
      */
     public CompositeArgumentParser(String argumentName, ArgumentParser... parsers) {
         this.argumentName = argumentName;
@@ -53,7 +50,7 @@ public class CompositeArgumentParser implements ArgumentParser {
             // ignore first
             if (arg.equals(argumentName) && parsers.size() > 0 && parsers.get(0) instanceof SkipArgumentParser)
                 updated.add(arg);
-            // end
+                // end
             else if (!arg.startsWith(argumentName + "-"))
                 break;
             else
@@ -82,7 +79,7 @@ public class CompositeArgumentParser implements ArgumentParser {
             int itConsumed = 0;
 
             for (Iterator<ArgumentParser> it = residual.iterator(); it.hasNext()
-                    && start + itConsumed + totalConsumed < args.length;) {
+                    && start + itConsumed + totalConsumed < args.length; ) {
                 ArgumentParser parser = it.next();
                 int consumed = parser.parse(args, start + itConsumed + totalConsumed);
                 if (consumed != 0) {
